@@ -54,6 +54,12 @@ h1,h2,h3,h4{margin:0;line-height:1.25;text-wrap:balance}
 .top p{margin:0;max-width:62ch;color:var(--muted)}
 .tag{justify-self:start;font-size:13px;font-weight:600;color:var(--flag);background:var(--flag-soft);padding:3px 9px;border-radius:3px}
 .sec h2{font-size:19px;margin-bottom:12px}
+.hubs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.hubc{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:6px;align-content:start;text-decoration:none;color:var(--ink);min-width:0}
+.hubc:hover{border-color:var(--accent)}
+.hubc b{font-size:17px;line-height:1.3}
+.hubc span{color:var(--muted);font-size:14px;line-height:1.5}
+.hubc i{font-style:normal;color:var(--accent);font-weight:600;font-size:14px;margin-top:2px}
 .forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
 .form{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;min-width:0}
 .form h3{font-size:20px}
@@ -246,16 +252,19 @@ function home(){
    <div class="top"><span class="tag">แบบจำลองเพื่อฝึกซ้อม ไม่ใช่ข้อสอบจริงของ ETS</span>
     <h1>TOEIC Mock Exam Room</h1>
     <p>สอบ Listening &amp; Reading แบบคอมพิวเตอร์ครบ 200 ข้อ 2 ชั่วโมง เสียงเล่นต่อเนื่องครั้งเดียว ข้อเปลี่ยนเอง Reading จับเวลา 75 นาที จบแล้วเห็นคะแนนประมาณการและเฉลยไทยทุกข้อ</p></div>
+   <section class="sec hub" aria-label="ทุกส่วนในเว็บนี้"><h2>ทุกอย่างในเว็บนี้</h2><div class="hubs">
+    <a class="hubc" href="#forms"><b>ข้อสอบเต็มชุด</b><span>3 ชุด ชุดละ 200 ข้อ จับเวลาเหมือนจริง มีเฉลยและคะแนนประมาณการ</span><i>เลือกชุดด้านล่าง ↓</i></a>
+    <a class="hubc" href="part1/"><b>Part 1 ดูรูปแล้วฟัง</b><span>100 ข้อ ฟังซ้ำ ฟังช้าได้ เฉลยทุกตัวเลือก และวิธีทำ</span><i>เปิดชุดฝึก →</i></a>
+    <a class="hubc" href="vocab/"><b>คำศัพท์ที่ออกบ่อย</b><span>แยกหมวด มีตัวอย่างประโยค แตะฟังเสียงได้ และวิธีแยกชนิดคำ</span><i>เปิดลิสต์คำศัพท์ →</i></a>
+    <a class="hubc" href="flash/"><b>แฟลชการ์ด</b><span>540 ใบ 13 หมวด พลิกการ์ดท่องศัพท์ จำว่าคำไหนจำได้แล้ว</span><i>เริ่มท่อง →</i></a>
+    <a class="hubc" href="tips/"><b>ทริกทำข้อสอบ</b><span>เทคนิคทุก Part และแผนแบ่งเวลา Reading 75 นาที</span><i>อ่านทริก →</i></a>
+   </div></section>
    ${saved?`<div class="resume"><div><b>มีการสอบค้างอยู่</b> Form ${saved.tid} ส่วน ${saved.phase==='R'?'Reading':'Listening'} ตอบไปแล้ว ${Object.keys(saved.ans).length} ข้อ</div>
      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri sm" id="resume">Resume Test</button><button class="btn sm" id="drop">ลบทิ้ง</button></div></div>`:''}
-   <section class="sec"><h2>เลือกชุดข้อสอบ</h2><div class="forms">
+   <section class="sec" id="forms"><h2>เลือกชุดข้อสอบ</h2><div class="forms">
     ${FORMS.map(id=>`<div class="form"><h3>Form ${id}</h3><div class="meta">200 ข้อ · Listening 45 นาที + Reading 75 นาที</div>
       <button class="btn pri" data-go="${id}" data-mode="full">เริ่มสอบเต็มชุด</button>
       <div class="row"><button class="btn sm" data-go="${id}" data-mode="L">Listening อย่างเดียว</button><button class="btn sm" data-go="${id}" data-mode="R">Reading อย่างเดียว</button></div></div>`).join('')}
-   </div></section>
-   <section class="sec"><h2>ฝึกเพิ่มเฉพาะส่วน</h2><div class="forms">
-    <div class="form"><h3>Part 1 ดูรูปแล้วฟัง</h3><div class="meta">100 ข้อ · มีเฉลยทุกตัวเลือก คำที่ต้องจับ และวิธีทำ ฟังซ้ำและฟังช้าได้</div>
-      <a class="btn pri" href="part1/" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">เปิดชุดฝึก Part 1</a></div>
    </div></section>
    <section class="sec"><h2>โครงสร้างข้อสอบ</h2><div class="tw"><table class="t"><tr><th>ส่วน</th><th>Part</th><th class="n">ข้อ</th><th class="n">เวลา</th></tr>
     ${[1,2,3,4,5,6,7].map(p=>`<tr><td>${p<5?'Listening':'Reading'}</td><td>${p}. ${PARTS[p]}</td><td class="n">${PCOUNT[p]}</td><td class="n">${p===1?'45 นาที':p===5?'75 นาที':''}</td></tr>`).join('')}

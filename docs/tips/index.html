@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>TOEIC Tips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#e9edef; --panel:#fff; --sheet:#fbfcfc; --ink:#17232b; --muted:#566670; --line:#c9d2d7;
+  --bar:#14303b; --bar-ink:#eaf2f4; --bar-muted:#a5bcc5;
+  --accent:#0d6275; --accent-ink:#fff; --accent-soft:#d9ebef;
+  --flag:#9a6200; --flag-soft:#fbeed3; --mark:#fff0b8;
+  --sans:"IBM Plex Sans","IBM Plex Sans Thai",Tahoma,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10191e; --panel:#1a262d; --sheet:#1f2d35; --ink:#e4ecef; --muted:#9db0ba; --line:#33454f;
+  --bar:#0a1216; --bar-ink:#e4ecef; --bar-muted:#8ea5af;
+  --accent:#4fb3c9; --accent-ink:#06222a; --accent-soft:#17404c;
+  --flag:#e9b45a; --flag-soft:#3f3013; --mark:#4a3f12; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10191e; --panel:#1a262d; --sheet:#1f2d35; --ink:#e4ecef; --muted:#9db0ba; --line:#33454f;
+  --bar:#0a1216; --bar-ink:#e4ecef; --bar-muted:#8ea5af;
+  --accent:#4fb3c9; --accent-ink:#06222a; --accent-soft:#17404c;
+  --flag:#e9b45a; --flag-soft:#3f3013; --mark:#4a3f12; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{line-height:1.3;text-wrap:balance;margin:0}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{background:var(--bar);color:var(--bar-ink);position:sticky;top:0;z-index:5}
+.bar .in{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:4px 18px;min-height:52px;padding-block:6px;flex-wrap:wrap}
+.bar a{color:var(--bar-ink);text-decoration:none;font-weight:500;white-space:nowrap;padding:4px 0}
+.bar a:hover{text-decoration:underline}
+.bar .ttl{font-weight:700}
+.bar nav{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:flex-end}
+.bar nav a[aria-current]{color:var(--bar-muted);text-decoration:underline;text-underline-offset:4px}
+@media (max-width:640px){.bar nav{justify-content:flex-start;flex-basis:100%}}
+main{max-width:1000px;margin:0 auto;padding-block:28px 60px;display:grid;gap:26px}
+.hero{display:grid;gap:10px}
+.hero h1{font-size:clamp(27px,5vw,38px);font-weight:700}
+.hero p{margin:0;color:var(--muted);max-width:68ch}
+.tools{position:sticky;top:52px;z-index:4;background:var(--bg);padding-block:10px;display:grid;gap:10px;border-bottom:1px solid var(--line)}
+@media (max-width:640px){.tools{top:84px}}
+.search{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search input{flex:1;min-width:200px;font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:9px 12px;min-height:44px}
+.search input:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.search .cnt{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.toc{display:flex;gap:6px;flex-wrap:wrap}
+.toc a{font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:3px 10px;text-decoration:none;color:var(--ink)}
+.toc a:hover{border-color:var(--accent)}
+details.tocw summary{cursor:pointer;font-size:14px;color:var(--muted);font-weight:600}
+details.tocw[open] summary{margin-bottom:8px}
+section{display:grid;gap:12px;min-width:0}
+section h2{font-size:23px;padding-top:8px}
+section h3{font-size:18px;padding-top:6px}
+section p,section li{max-width:76ch}
+section p{margin:0}
+section ul{margin:0;padding-left:22px;display:grid;gap:6px}
+section li p{margin:0}
+section ul ul{margin-top:6px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:600}
+tr:last-child td{border-bottom:0}
+td+td,th+th{border-left:1px solid var(--line)}
+td.say{color:var(--accent);font-weight:600;cursor:pointer;white-space:nowrap}
+td.say.ex{white-space:normal;font-weight:400;color:var(--ink)}
+td.say::after{content:"";display:inline-block;width:14px;height:14px;margin-left:6px;vertical-align:-2px;opacity:.55;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 6h3l4-3v10L5 10H2z'/%3E%3Cpath d='M11 5.5a3.5 3.5 0 0 1 0 5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 6h3l4-3v10L5 10H2z'/%3E%3Cpath d='M11 5.5a3.5 3.5 0 0 1 0 5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat}
+td.say.on{background:var(--accent-soft)}
+mark{background:var(--mark);color:inherit;border-radius:2px}
+.cross{background:var(--panel);border:1px solid var(--accent);border-left-width:4px;border-radius:6px;padding:12px 14px}
+.cross a{font-weight:600}
+.hide{display:none!important}
+.empty{color:var(--muted)}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:6px}
+footer p{margin:0}
+</style>
+</head>
+<body>
+<header class="bar"><div class="in pad"><a class="ttl" href="../">TOEIC · หน้าหลัก</a><nav aria-label="ส่วนต่าง ๆ ของเว็บ"><a href="../part1/">Part 1 ฝึกฟัง</a><a href="../vocab/">คำศัพท์</a><a href="../tips/" aria-current=page>ทริกทำข้อสอบ</a><a href="../flash/">แฟลชการ์ด</a></nav></div></header>
+<main class="pad">
+  <div class="hero">
+    <h1>ทริกทำข้อสอบ TOEIC</h1>
+    <p>ทริกในหน้านี้ใช้ได้กับหลายข้อ ไม่ต้องจำกฎยาก ๆ และทุกข้อมีตัวอย่างจากข้อสอบจำลองให้ดู</p>
+  </div>
+  <nav class="toc" aria-label="เลือก Part"><a href="#s1">ทริกที่ใช้ได้ทุก Part</a><a href="#s2">Part 1 Photographs</a><a href="#s3">Part 2 Question-Response</a><a href="#s4">Part 3–4 Conversations &amp; Talks</a><a href="#s5">Part 5 Incomplete Sentences</a><a href="#s6">Part 6 Text Completion</a><a href="#s7">Part 7 Reading Comprehension</a></nav>
+  <section id="s1"><h2>ทริกที่ใช้ได้ทุก Part</h2>
+<ul><li><p><strong>ตอบให้ครบทุกข้อ</strong> ตอบผิดไม่ถูกหักคะแนน ข้อที่เว้นว่างคือศูนย์แน่นอน ส่วนข้อที่เดายังมีโอกาสถูก</p></li><li><p><strong>ตัวเลือกที่ใช้คำซ้ำกับที่ได้ยินเป๊ะ ๆ มักผิด</strong> ตัวที่ถูกมักเปลี่ยนเป็นคำเหมือน เช่น ได้ยิน projector แต่ตัวเลือกเขียนว่า equipment (ดูคำคู่แบบนี้ได้ที่หัวข้อ paraphrase ใน<a href="../vocab/#s14">หน้าคำศัพท์</a>)</p></li><li><p><strong>ไม่รู้ให้เดาแล้วไปต่อทันที</strong> ใน Listening ถ้ามัวคิดข้อเก่า จะพลาดข้อใหม่ต่อกันเป็นชุด เลือกตัวอักษรเดาประจำไว้ก่อนเข้าสอบ จะได้ไม่เสียเวลาลังเล</p></li><li><p><strong>ใช้วิธีตัดตัวเลือก</strong> ไม่ต้องมั่นใจว่าตัวไหนถูก แค่ตัดตัวที่ผิดชัด ๆ ออกก่อน เหลือ 2 ตัวก็มีโอกาสถูกครึ่งหนึ่งแล้ว</p></li></ul>
+<h3>แผนแบ่งเวลา Reading 75 นาที</h3>
+<p>คนส่วนใหญ่ทำ Part 7 ไม่ทัน เพราะใช้เวลากับ Part 5 มากเกินไป ลองใช้เวลาตามนี้เป็นจุดเริ่มต้น</p>
+<div class="tw"><table><thead><tr><th>Part</th><th>จำนวนข้อ</th><th>เวลาที่ควรใช้</th><th>เฉลี่ยต่อข้อ</th></tr></thead><tbody><tr><td>Part 5</td><td>30</td><td>10 นาที</td><td>20 วินาที</td></tr><tr><td>Part 6</td><td>16</td><td>8 นาที</td><td>30 วินาที</td></tr><tr><td>Part 7</td><td>54</td><td>55 นาที</td><td>ราว 1 นาที</td></tr><tr><td>เผื่อเวลา</td><td>–</td><td>2 นาที</td><td>–</td></tr></tbody></table></div>
+<p>เวลาเหล่านี้เป็นคำแนะนำทั่วไป ลองจับเวลาตอนสอบจำลองแล้วปรับให้เข้ากับตัวเอง</p>
+</section><section id="s2"><h2>Part 1 Photographs</h2>
+<ul><li><p><strong>ดูภาพก่อนเสียงเริ่ม</strong> ถามตัวเอง 3 ข้อ: มีคนไหม คนกำลังทำอะไร และของสำคัญวางอยู่ตรงไหน</p></li><li><p><strong>ภาพไม่มีคน ให้ระวัง is being + V3</strong> รูปนี้แปลว่า &quot;กำลังถูกทำอยู่&quot; จึงต้องมีคนกำลังทำในภาพ</p><ul><li><p>ภาพกระสอบกองอยู่เฉย ๆ: &quot;Some sacks have been stacked in a pile.&quot; ถูก แต่ &quot;Some bags are being loaded onto a truck.&quot; ผิด</p></li><li><p>ภาพสิ่งของมักตอบด้วย has/have been + V3 หรือ is + ตำแหน่ง เช่น is lying on, is leaning against</p></li><li><p>ข้อยกเว้นที่พบบ้าง: is being displayed ใช้กับสินค้าที่วางโชว์ได้แม้ไม่มีคน</p></li></ul></li><li><p><strong>wearing กับ putting on ไม่เหมือนกัน</strong> wearing = สวมอยู่ (สภาพ) ส่วน putting on = กำลังสวม และ taking off = กำลังถอด (การกระทำ) ถ้าในภาพสวมหมวกนิ่ง ๆ ตัวเลือก &quot;taking off her hat&quot; ผิด</p></li><li><p><strong>เห็นของในภาพ ไม่ได้แปลว่าตัวเลือกถูก</strong> ตัวลวงมักพูดถึงของที่มีจริง แต่ใส่กริยาผิด เช่น มีต้นไม้ในภาพ แต่ &quot;A person is watering a plant.&quot; ผิดเพราะไม่มีใครรดน้ำ</p></li><li><p><strong>ในภาพไม่มีคน ให้ตัดตัวเลือกที่ขึ้นต้นด้วยคนทันที</strong> เช่น A man is..., Someone is...</p></li></ul>
+<div class="cross">ฝึกต่อ: <a href="../part1/#how">วิธีทำ Part 1 แบบละเอียด</a> และ <a href="../part1/">ชุดฝึกดูรูปแล้วฟัง 100 ข้อ</a> พร้อมเฉลยและเทคนิคจับคำ</div></section><section id="s3"><h2>Part 2 Question-Response</h2>
+<p>คำแรกของคำถามคือกุญแจสำคัญที่สุด ฟังคำแรกให้ชัด แล้วตัดตัวเลือกที่ตอบผิดประเภททิ้งได้เลย</p>
+<div class="tw"><table><thead><tr><th>ถ้าได้ยิน</th><th>คำตอบที่ถูกมักเป็น</th><th>ตัวอย่าง</th></tr></thead><tbody><tr><td>Who</td><td>คน ตำแหน่ง หรือแผนก</td><td>Someone from human resources.</td></tr><tr><td>When</td><td>เวลา</td><td>By Thursday afternoon.</td></tr><tr><td>Where</td><td>สถานที่ หรือคนที่มีของนั้น</td><td>Mr. Kim has them on his computer.</td></tr><tr><td>Why</td><td>เหตุผล ไม่จำเป็นต้องมี because</td><td>It&#39;s being repainted.</td></tr><tr><td>How long / often / much / far</td><td>ระยะเวลา ความถี่ ราคา ระยะทาง</td><td>About twice a year.</td></tr><tr><td>Why don&#39;t we / Could you / Would you like</td><td>ตอบรับหรือปฏิเสธ ไม่ใช่บอกเหตุผล</td><td>Sorry, I have a meeting with a client.</td></tr><tr><td>A or B</td><td>เลือกอย่างหนึ่ง หรือตอบทางที่ 3 ห้ามตอบ Yes/No</td><td>Either is fine with me.</td></tr><tr><td>ประโยคบอกเล่า (ไม่ใช่คำถาม)</td><td>ปฏิกิริยา หรือทางแก้</td><td>Then let&#39;s take the stairs.</td></tr></tbody></table></div>
+<ul><li><p><strong>คำถาม WH ตอบ Yes/No ไม่ได้</strong> ถ้าได้ยิน Where แล้วตัวเลือกขึ้นต้นด้วย Yes ตัดทิ้งทันที</p></li><li><p><strong>เสียงคล้ายมักเป็นตัวลวง</strong> เช่น ถามเรื่อง price ตัวลวงพูดถึง prize หรือถามเรื่อง accountant ตัวลวงพูด counted</p></li><li><p><strong>คำซ้ำกับคำถามมักผิด</strong> ถาม &quot;The copy machine is out of order.&quot; ตัวเลือก &quot;In alphabetical order.&quot; ผิด ตัวที่ถูกคือ &quot;A technician is on the way.&quot;</p></li><li><p><strong>คำตอบแบบอ้อมถูกบ่อยมาก</strong> เช่น I&#39;m not sure, Let me check, Ask Ms. Park, I&#39;m still waiting for an estimate ตอบได้แทบทุกคำถาม</p></li><li><p><strong>Would you mind...?</strong> ถ้ายินดีช่วย ต้องตอบ Not at all เพราะแปลว่า &quot;ไม่ขัดข้องเลย&quot;</p></li></ul>
+</section><section id="s4"><h2>Part 3–4 Conversations &amp; Talks</h2>
+<p>อ่านคำถามทั้ง 3 ข้อก่อนเสียงเริ่ม จะได้รู้ว่าต้องฟังอะไร คำตอบมักมาตามลำดับบทสนทนา คือข้อแรกอยู่ต้น ข้อสุดท้ายอยู่ท้าย</p>
+<div class="tw"><table><thead><tr><th>ถ้าคำถามถามเรื่อง</th><th>ฟังตรงไหน</th><th>คำที่เป็นสัญญาณ</th></tr></thead><tbody><tr><td>หัวข้อ สถานที่ อาชีพของผู้พูด</td><td>1–2 ประโยคแรก</td><td>I&#39;m calling about..., Welcome to...</td></tr><tr><td>ปัญหา</td><td>ช่วงกลาง</td><td>but, unfortunately, I&#39;m afraid, the problem is</td></tr><tr><td>ข้อเสนอ คำแนะนำ คำขอ</td><td>ช่วงกลางถึงท้าย</td><td>I can..., Let me..., Why don&#39;t you..., Could you...</td></tr><tr><td>สิ่งที่จะทำต่อ</td><td>ประโยคท้าย ๆ</td><td>I&#39;ll..., I&#39;m going to..., Let&#39;s...</td></tr></tbody></table></div>
+<ul><li><p><strong>ดูว่าคำถามถามใคร</strong> &quot;What does the man offer?&quot; ให้ตั้งใจฟังเสียงผู้ชาย ตัวลวงมักเอาสิ่งที่ผู้หญิงพูดมาใส่</p></li><li><p><strong>คำถามกราฟิก (Look at the graphic)</strong> ดูกราฟิกก่อน คำตอบอยู่คนละคอลัมน์กับที่ได้ยิน</p><ul><li><p>ตัวเลือกเป็นชื่อแพ็กเกจ ให้ฟังราคา เช่น ได้ยิน &quot;the eighteen-dollar package&quot; แล้วเปิดตาราง จะได้คำตอบว่า Harbor</p></li><li><p>ตัวเลือกเป็นเดือน ให้ฟังคำบอกลักษณะ เช่น the lowest, the month after, right after Human Resources</p></li></ul></li><li><p><strong>คำถามความหมายแฝง (What does ... mean when ... says)</strong> อย่าแปลตรงตัว ให้ดูว่าพูดตอบอะไร เช่น เขาบอกว่าขายตั๋วได้เกิน 100 ใบ แล้วเธอพูด &quot;I expected about thirty people&quot; แปลว่าเธอประหลาดใจ ไม่ใช่บอกตัวเลข</p></li><li><p><strong>ตัวเลือกถูกมักเปลี่ยนคำ</strong> ได้ยิน &quot;the toner is on back order&quot; ตัวเลือกที่ถูกคือ &quot;An item is temporarily out of stock.&quot;</p></li><li><p><strong>Part 4 ดูประเภทบทพูดก่อน</strong> ประเภทบอกโครงเรื่องล่วงหน้า</p><ul><li><p>telephone message: ใครโทรมา → ปัญหาคืออะไร → ขอให้ผู้ฟังทำอะไร</p></li><li><p>advertisement: ขายอะไร → จุดเด่น → โปรโมชันหรือวิธีสมัคร</p></li><li><p>announcement: อะไรเปลี่ยน → เพราะอะไร → ผู้ฟังต้องทำอะไร</p></li></ul></li><li><p><strong>ฟังไม่ทันให้ตอบเดาทันที</strong> แล้วรีบอ่านคำถามชุดต่อไป ถ้าค้างชุดเก่า จะพลาดชุดใหม่ด้วย</p></li></ul>
+</section><section id="s5"><h2>Part 5 Incomplete Sentences</h2>
+<p>ดูตัวเลือกก่อนอ่านโจทย์ ถ้าตัวเลือกเป็นคำเดียวกันคนละรูป เช่น decide / decision / decisive / decisively ไม่ต้องแปลทั้งประโยค ดูแค่คำรอบช่องว่างก็ตอบได้ใน 10 วินาที</p>
+<div class="tw"><table><thead><tr><th>ช่องว่างอยู่ตรงไหน</th><th>ต้องเติม</th><th>ตัวอย่าง</th></tr></thead><tbody><tr><td>หลัง a / the / his / their และก่อน of</td><td>คำนาม</td><td>The <strong>construction</strong> of the bridge...</td></tr><tr><td>หน้าคำนาม</td><td>คำคุณศัพท์</td><td>the restaurant&#39;s <strong>favorable</strong> reviews</td></tr><tr><td>หลัง be / become / seem</td><td>คำคุณศัพท์</td><td>The staff were very <strong>helpful</strong>.</td></tr><tr><td>ขยายกริยา หรือแทรก has ___ V3</td><td>คำวิเศษณ์ (-ly)</td><td>has <strong>finally</strong> approved / work <strong>closely</strong></td></tr><tr><td>หน้าคำคุณศัพท์</td><td>คำวิเศษณ์</td><td><strong>considerably</strong> easier</td></tr><tr><td>หลังบุพบท (for, by, before)</td><td>V-ing หรือคำนาม</td><td>for <strong>completing</strong> the project</td></tr><tr><td>หลัง will / can / should / must</td><td>กริยาช่อง 1</td><td>will <strong>renew</strong> automatically</td></tr></tbody></table></div>
+<ul><li><p><strong>จำคำลงท้าย</strong> -tion, -ment, -ness, -ity, -ance = คำนาม · -ful, -ive, -able, -al, -ous = คำคุณศัพท์ · -ly = คำวิเศษณ์ ระวัง friendly, costly, timely เป็นคำคุณศัพท์</p></li><li><p><strong>ตัวเลือกเป็นคำต่างความหมาย</strong> ต้องแปล แต่ดูคำที่มาคู่ก่อน เช่น เห็น &quot;be ___ to change&quot; ตอบ subject ได้เลย</p></li><li><p><strong>คำเชื่อมกับบุพบท</strong> ถ้าหลังช่องว่างมีประธาน + กริยา ใช้ although / because / when ถ้ามีแค่คำนาม ใช้ despite / because of / during</p><ul><li><p><strong>Despite</strong> the heavy rain, ... · <strong>Although</strong> it rained heavily, ...</p></li></ul></li><li><p><strong>หาคำบอกเวลาก่อนเลือก tense</strong> next spring → will · for 20 years / since 2016 → has + V3 · by the time + ปัจจุบัน → will have + V3</p></li><li><p><strong>คำนามนับได้หรือไม่</strong> many / few / numerous + พหูพจน์ · much / little + นับไม่ได้ (information, equipment, luggage)</p></li><li><p><strong>ข้อไหนเกิน 30 วินาทีให้เดาแล้วไปต่อ</strong> เวลาที่เก็บได้จะไปช่วย Part 7 ซึ่งมีข้อมากที่สุด</p></li></ul>
+</section><section id="s6"><h2>Part 6 Text Completion</h2>
+<p>ต่างจาก Part 5 ตรงที่คำตอบมักขึ้นกับประโยคก่อนหน้าหรือถัดไป จึงต้องอ่านต่อเนื่องทั้งย่อหน้า ไม่ใช่กระโดดอ่านแค่ประโยคที่มีช่องว่าง</p>
+<ul><li><p><strong>Tense ดูจากทั้งเรื่อง</strong> ประกาศบอกว่างานจะเริ่ม April 22 ประโยคต่อมาจะใช้อนาคตทั้งหมด แม้ในประโยคนั้นจะไม่มีคำบอกเวลา</p></li><li><p><strong>คำเชื่อม (However, In addition, As a result) ดูความสัมพันธ์ 2 ประโยค</strong> เนื้อความขัดกัน → However · เพิ่มข้อมูล → In addition · เป็นผล → As a result · อีกทางหนึ่ง → Alternatively</p></li><li><p><strong>ข้อเติมประโยค ให้อ่านประโยคถัดไปด้วย</strong> คำอย่าง both, these, they, it ในประโยคถัดไปบอกว่าช่องว่างต้องพูดถึงอะไร</p><ul><li><p>ประโยคถัดไปเขียนว่า &quot;We have attached photographs of <strong>both</strong>&quot; ช่องว่างจึงต้องเป็นประโยคที่พูดถึง 2 สิ่ง คือ &quot;we can offer two similar shades instead&quot;</p></li></ul></li><li><p><strong>ตัดตัวเลือกที่เปิดเรื่องใหม่</strong> ประโยคที่ถูกต้องต่อเนื่องกับเรื่องเดิม ตัวที่พูดถึงเรื่องอื่น เช่น ประกาศปิดสระว่ายน้ำ แต่ตัวเลือกพูดถึงประวัติฟิตเนส มักผิด</p></li></ul>
+</section><section id="s7"><h2>Part 7 Reading Comprehension</h2>
+<p>อ่านคำถามก่อนอ่านบทความ แล้วค่อยกวาดตาหาคำที่เกี่ยวข้อง จะเร็วกว่าอ่านทั้งเรื่องก่อนมาก</p>
+<div class="tw"><table><thead><tr><th>ถ้าคำถามเขียนว่า</th><th>หาคำตอบยังไง</th></tr></thead><tbody><tr><td>What is the purpose of / Why was ... written</td><td>ดูหัวข้ออีเมล (Subject) และย่อหน้าแรก</td></tr><tr><td>According to / What is stated</td><td>หา keyword เช่น ชื่อ ตัวเลข วันที่ แล้วอ่านประโยครอบ ๆ</td></tr><tr><td>NOT mentioned / NOT true</td><td>เช็กทีละตัวเลือก ตัวที่หาในบทความไม่เจอคือคำตอบ</td></tr><tr><td>suggested / implied / most likely</td><td>ไม่ได้เขียนตรง ๆ แต่ต้องมีหลักฐานในบทความ ห้ามตอบจากความรู้ทั่วไป</td></tr><tr><td>the word &quot;...&quot; is closest in meaning to</td><td>ลองแทนตัวเลือกลงในประโยค ตัวที่ความหมายไม่เปลี่ยนคือคำตอบ เช่น the error was corrected → fixed</td></tr><tr><td>[1], [2], [3], [4] ใส่ประโยค</td><td>ดูคำชี้ในประโยคที่ให้มา เช่น This, He, Those numbers, However แล้วหาว่ามันหมายถึงอะไร</td></tr><tr><td>At 9:46, what does ... mean</td><td>อ่านข้อความก่อนหน้านั้นว่ากำลังตอบเรื่องอะไร</td></tr></tbody></table></div>
+<ul><li><p><strong>บทความ 2–3 ฉบับ มักมี 1–2 ข้อที่ต้องเชื่อมข้อมูลข้ามฉบับ</strong> อีเมลบอกว่าอยากได้ต้นไม้ 20 ต้น ส่วนโฆษณามีตารางแพ็กเกจ คำตอบจึงคือแพ็กเกจที่รับได้ไม่เกิน 25 ต้น</p></li><li><p><strong>ตัวเลข วันที่ และเงื่อนไขท้ายประกาศคือจุดที่ข้อสอบชอบใช้เชื่อม</strong> เช่น กฎต้องจองล่วงหน้า 14 วัน แต่อีเมลส่งวันที่ 2 เพื่อจองวันที่ 12 งานจึงถูกเลื่อน</p></li><li><p><strong>ตัวเลือกที่ถูกครึ่งเดียวคือผิด</strong> ตัวลวงมักถูกเรื่อง แต่ผิดคน ผิดวัน หรือผิดตัวเลข อ่านให้จบทุกคำก่อนเลือก</p></li><li><p><strong>เวลาเหลือน้อย ให้เลือกทำข้อที่หาเร็วก่อน</strong> คือข้อถามรายละเอียดและข้อคำศัพท์ ส่วนข้อ NOT และข้อใส่ประโยคใช้เวลามาก เก็บไว้ทีหลังได้</p></li><li><p><strong>กด Mark item for review</strong> กับข้อที่เดาไว้ เหลือเวลาค่อยกลับมาดูผ่านหน้า Review</p></li></ul>
+</section>
+  <div class="cross">ลองใช้ทริกกับข้อสอบจริง ไปที่ <a href="../">ห้องสอบจำลอง</a> ข้อสอบเต็มชุด 200 ข้อ 3 ชุด</div>
+  <footer><p>ตัวอย่างในหน้านี้มาจากข้อสอบจำลองที่แต่งขึ้นใหม่ ไม่ใช่ข้อสอบของ ETS · TOEIC เป็นเครื่องหมายการค้าของ ETS</p></footer>
+</main>
+<script></script>
+</body>
+</html>
