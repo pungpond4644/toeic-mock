@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>TOEIC Part 1 Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Same workstation look as the mock exam room: dark status bar, one work area, quiet panels. */
+:root{
+  --bg:#e9edef; --panel:#fff; --sheet:#fbfcfc; --ink:#17232b; --muted:#566670; --line:#c9d2d7;
+  --bar:#14303b; --bar-ink:#eaf2f4; --bar-muted:#a5bcc5;
+  --accent:#0d6275; --accent-ink:#fff; --accent-soft:#d9ebef;
+  --flag:#9a6200; --flag-soft:#fbeed3; --ok:#17744a; --ok-soft:#dcf1e6; --bad:#b0342c; --bad-soft:#f9e1de;
+  --mark:#fff0b8; --photo:#0b1418;
+  --sans:"IBM Plex Sans","IBM Plex Sans Thai",Tahoma,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10191e; --panel:#1a262d; --sheet:#1f2d35; --ink:#e4ecef; --muted:#9db0ba; --line:#33454f;
+  --bar:#0a1216; --bar-ink:#e4ecef; --bar-muted:#8ea5af;
+  --accent:#4fb3c9; --accent-ink:#06222a; --accent-soft:#17404c;
+  --flag:#e9b45a; --flag-soft:#3f3013; --ok:#5fcf9b; --ok-soft:#163a2a; --bad:#f28f86; --bad-soft:#47201d;
+  --mark:#4a3f12; --photo:#000; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10191e; --panel:#1a262d; --sheet:#1f2d35; --ink:#e4ecef; --muted:#9db0ba; --line:#33454f;
+  --bar:#0a1216; --bar-ink:#e4ecef; --bar-muted:#8ea5af;
+  --accent:#4fb3c9; --accent-ink:#06222a; --accent-soft:#17404c;
+  --flag:#e9b45a; --flag-soft:#3f3013; --ok:#5fcf9b; --ok-soft:#163a2a; --bad:#f28f86; --bad-soft:#47201d;
+  --mark:#4a3f12; --photo:#000; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);min-height:100vh}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{margin:0;line-height:1.3;text-wrap:balance}
+p{margin:0}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mono)}
+
+/* status bar */
+.bar{background:var(--bar);color:var(--bar-ink);position:sticky;top:0;z-index:5}
+.bar .in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:6px 14px;min-height:52px;flex-wrap:wrap;padding-block:6px}
+.bar a,.bar button.lk{color:var(--bar-ink);text-decoration:none;font-weight:500;background:none;border:0;padding:6px 2px}
+.bar a:hover{text-decoration:underline}
+.bar .ttl{font-weight:600}
+.bar .sp{flex:1}
+.bar .meta{color:var(--bar-muted);font-size:14px;font-variant-numeric:tabular-nums}
+
+/* buttons */
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:8px 16px;font-weight:600;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn svg{width:14px;height:14px;fill:currentColor;flex:none}
+.btn.sm{min-height:36px;padding:4px 12px;font-size:14px}
+.btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* home */
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:34px;padding-block:30px 56px}
+.hero{display:grid;gap:10px}
+.hero h1{font-size:clamp(27px,5vw,40px);font-weight:700;letter-spacing:-.01em}
+.hero p{max-width:64ch;color:var(--muted)}
+.tag{justify-self:start;font-size:13px;font-weight:600;color:var(--flag);background:var(--flag-soft);padding:2px 9px;border-radius:3px}
+.sec{display:grid;gap:14px}
+.sec>h2{font-size:20px}
+.sec>p{color:var(--muted);max-width:70ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.card h3{font-size:18px}
+.card .meta{color:var(--muted);font-size:14px}
+.card.lead{border-color:var(--accent);background:var(--accent-soft)}
+.stat{display:flex;flex-wrap:wrap;gap:8px 28px}
+.stat div{display:grid}
+.stat b{font-size:26px;font-variant-numeric:tabular-nums;line-height:1.2}
+.stat span{color:var(--muted);font-size:14px}
+.sets{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.set{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;text-decoration:none;color:var(--ink);display:grid;gap:2px}
+.set:hover{border-color:var(--accent)}
+.set b{font-size:17px}
+.set span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.set.done span.sc{color:var(--ok);font-weight:600}
+.traps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.trap{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;text-decoration:none;color:var(--ink);display:grid;gap:4px}
+.trap:hover{border-color:var(--accent)}
+.trap b{font-size:16px}
+.trap span{font-size:13px;color:var(--muted)}
+.meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok)}
+.grid100{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px}
+.grid100 a{display:flex;align-items:center;justify-content:center;height:40px;border:1px solid var(--line);border-radius:4px;background:var(--panel);text-decoration:none;color:var(--ink);font:600 14px var(--mono)}
+.grid100 a.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.grid100 a.bad{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;margin-right:5px}
+.legend .ok i{background:var(--ok-soft);border-color:var(--ok)}
+.legend .bad i{background:var(--bad-soft);border-color:var(--bad)}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:6px}
+
+/* practice */
+.pq{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;padding-block:20px 48px;align-items:start}
+@media (max-width:860px){.pq{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:14px}}
+.left{display:grid;gap:12px;position:sticky;top:64px}
+@media (max-width:860px){.left{position:static}}
+.ph{margin:0;background:var(--photo);border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ph img{display:block;max-width:100%;height:auto;max-height:56vh;width:auto;object-fit:contain}
+.ctrl{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px;display:grid;gap:10px}
+.ctrl .lbl{font-size:13px;color:var(--muted);min-width:76px}
+.one button{width:44px;height:40px;border:1px solid var(--line);border-radius:4px;background:var(--sheet);font:600 15px var(--mono)}
+.one button:hover{border-color:var(--accent)}
+.playing{background:var(--accent)!important;color:var(--accent-ink)!important;border-color:var(--accent)!important}
+.chk{display:flex;gap:8px;align-items:center;font-size:14px}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.right{display:grid;gap:14px;min-width:0}
+.qh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.qh h2{font-size:22px}
+.ans{display:flex;gap:10px;flex-wrap:wrap}
+.ans button{width:64px;height:64px;border-radius:50%;border:2px solid var(--line);background:var(--panel);font:700 22px var(--mono);display:flex;align-items:center;justify-content:center}
+.ans button:hover:not(:disabled){border-color:var(--accent)}
+.ans button.sel{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ans button.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.ans button.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.ans button:disabled{cursor:default}
+.ans button.ok:disabled,.ans button.bad:disabled{opacity:1}
+.ans button:disabled:not(.ok):not(.bad){opacity:.5}
+.verdict{border-radius:6px;padding:12px 14px;font-weight:600}
+.verdict.ok{background:var(--ok-soft);color:var(--ok)}
+.verdict.bad{background:var(--bad-soft);color:var(--bad)}
+.stm{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.stm li{display:grid;grid-template-columns:40px 28px minmax(0,1fr);gap:8px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px 10px 8px}
+.stm li.ok{border-color:var(--ok);box-shadow:inset 4px 0 0 var(--ok)}
+.stm li.bad{border-color:var(--bad)}
+.stm .pl{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--sheet);display:flex;align-items:center;justify-content:center;padding:0}
+.stm .pl svg{width:14px;height:14px;fill:currentColor}
+.stm .L{font:700 16px/36px var(--mono)}
+.stm .en{font-weight:500;font-size:17px;line-height:1.5}
+.stm .th{font-size:15px;color:var(--muted);margin-top:2px}
+.stm li.ok .th{color:var(--ok)}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 2px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:12px 14px;display:grid;gap:6px}
+.note h4{font-size:14px;color:var(--muted);font-weight:600}
+.note.trapn{border-left-color:var(--flag)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:14px;background:var(--accent-soft);border-radius:3px;padding:2px 8px;font-weight:500}
+.nav{display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;padding-top:4px}
+.prev{font-size:14px;color:var(--muted)}
+.prev .ok{color:var(--ok);font-weight:600}.prev .bad{color:var(--bad);font-weight:600}
+.hint{font-size:14px;color:var(--muted)}
+
+/* exam */
+.ex{max-width:880px;margin:0 auto;display:grid;gap:16px;padding-block:18px 48px}
+.ex .ph img{max-height:60vh}
+.dots{display:flex;gap:5px;flex-wrap:wrap}
+.dots i{width:22px;height:6px;border-radius:3px;background:var(--bar-muted);opacity:.35}
+.dots i.done{opacity:1;background:var(--bar-muted)}
+.dots i.now{opacity:1;background:var(--accent)}
+.status{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:500}
+.wave{display:inline-flex;gap:3px;align-items:flex-end;height:18px}
+.wave i{width:4px;background:var(--accent);border-radius:2px;animation:w 1s ease-in-out infinite}
+.wave i:nth-child(2){animation-delay:.15s}.wave i:nth-child(3){animation-delay:.3s}.wave i:nth-child(4){animation-delay:.45s}
+@keyframes w{0%,100%{height:4px}50%{height:18px}}
+@media (prefers-reduced-motion:reduce){.wave i{animation:none;height:10px}}
+.intro{max-width:720px;margin:0 auto;padding-block:30px 48px;display:grid;gap:18px}
+.intro ul{margin:0;padding-left:22px;display:grid;gap:6px}
+.res{max-width:880px;margin:0 auto;padding-block:26px 48px;display:grid;gap:18px}
+.big{font-size:44px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.tw{overflow-x:auto}
+table.t{border-collapse:collapse;width:100%;background:var(--panel);font-size:15px;font-variant-numeric:tabular-nums}
+table.t th,table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+table.t th{background:var(--accent-soft);font-weight:600}
+table.t img{width:72px;height:48px;object-fit:cover;border-radius:3px;display:block}
+td.ok{color:var(--ok);font-weight:600}td.bad{color:var(--bad);font-weight:600}
+
+/* method page */
+.doc{max-width:860px;margin:0 auto;padding-block:30px 60px;display:grid;gap:34px}
+.doc section{display:grid;gap:14px}
+.doc h2{font-size:22px}
+.doc h3{font-size:17px}
+.doc p,.doc li{max-width:72ch}
+.doc ul,.doc ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.steps{display:grid;gap:10px;counter-reset:s;list-style:none;padding:0!important}
+.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px 14px 58px;position:relative;max-width:none}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:13px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:700 15px/28px var(--mono);text-align:center}
+.steps b{display:block;margin-bottom:2px}
+.ex-line{font-family:var(--sans);background:var(--sheet);border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:15px}
+.tcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:grid;gap:8px}
+.tcard .egw{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;align-items:start}
+.tcard .egw img{width:120px;height:80px;object-fit:cover;border-radius:4px;display:block}
+@media (max-width:520px){.tcard .egw{grid-template-columns:84px minmax(0,1fr)}.tcard .egw img{width:84px;height:60px}}
+.tcard .eg{display:grid;gap:4px;font-size:15px}
+.tcard .eg div{display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px}
+.tcard .eg .y{color:var(--ok);font-weight:700}.tcard .eg .n{color:var(--bad);font-weight:700}
+.vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.vg table{font-size:14px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const DATA=/*DATA*/[{"n":1,"photo":"c006","trap":"state","ans":"B","opts":[{"t":"Some people are swimming in the sea.","r":"ในภาพมีคนเดียว และไม่มีใครว่ายน้ำ"},{"t":"A person is facing the water.","r":"คนในภาพหันหน้าไปทางทะเล"},{"t":"The person is putting on a scarf.","r":"สวมผ้าพันคออยู่แล้ว putting on แปลว่ากำลังสวม จึงผิด"},{"t":"The person is taking off a jacket.","r":"ยังสวมเสื้อแจ็กเก็ตอยู่ ไม่ได้ถอด"}],"kw":["facing","putting on","taking off"],"tip":"ภาพคนหันหลัง ให้ฟังว่าเขา \"หันหน้าไปทางไหน\" ส่วนคำว่า putting on / taking off คือการกระทำ ต้องเห็นกำลังทำจริง ๆ ถึงจะถูก","wh":[960,640],"cues":[[1.67,3.52],[4.52,6.58],[7.58,9.69],[10.69,13.05]],"dur":14.05},{"n":2,"photo":"c015","trap":"verb","ans":"D","opts":[{"t":"Some trees are being cut down.","r":"ไม่มีใครกำลังตัดต้นไม้"},{"t":"A bridge is being repaired.","r":"ไม่มีคนกำลังซ่อมสะพาน"},{"t":"A woman is taking off her backpack.","r":"กระเป๋ายังสะพายอยู่บนหลัง"},{"t":"A woman is walking across a bridge.","r":"ผู้หญิงกำลังเดินข้ามสะพาน"}],"kw":["walking across","bridge","backpack"],"tip":"ฟังกริยาคู่กับคำนาม walking across a bridge ถ้าได้ยินคำว่า bridge แต่กริยาเป็น repaired ให้เช็กว่ามีคนซ่อมจริงไหม","wh":[960,640],"cues":[[1.73,3.96],[4.96,7.03],[8.03,10.63],[11.63,14.36]],"dur":15.36},{"n":3,"photo":"c025","trap":"sound","ans":"D","opts":[{"t":"A man is climbing a rock.","r":"ไม่ได้ปีนหิน"},{"t":"A man is raising a flag.","r":"ใช้คำว่า raise เหมือนกัน แต่ในภาพไม่มีธง"},{"t":"A man is swimming under a waterfall.","r":"เขายืนอยู่บนพื้น ไม่ได้ว่ายน้ำ"},{"t":"A man is standing with his arms raised.","r":"ผู้ชายยืนกางแขนชูขึ้น"}],"kw":["standing","arms raised","waterfall"],"tip":"ระวังคำเดียวกันที่ใช้คนละแบบ arms raised คือแขนชูขึ้น ส่วน raising a flag คือชักธง ข้อสอบชอบเอาคำที่ได้ยินซ้ำมาหลอก","wh":[960,640],"cues":[[1.75,3.42],[4.42,6.18],[7.18,9.58],[10.58,13.24]],"dur":14.24},{"n":4,"photo":"c027","trap":"sound","ans":"C","opts":[{"t":"A person is setting a clock on the wall.","r":"ไม่มีนาฬิกาแขวนผนัง"},{"t":"A person is washing his hands.","r":"watch กับ wash เสียงคล้ายกัน แต่ไม่มีการล้างมือ"},{"t":"A person is checking a watch.","r":"กำลังดูนาฬิกาข้อมือ"},{"t":"A person is taking off a watch.","r":"ยังใส่นาฬิกาอยู่ ไม่ได้ถอด"}],"kw":["checking","watch","wash"],"tip":"watch (วอทช์) กับ wash (วอช) ต่างกันแค่เสียงท้าย ให้ฟังเสียง -tch ที่ปลายคำให้ชัด","wh":[960,640],"cues":[[1.77,4.94],[5.94,8.88],[9.88,12.55],[13.55,16.48]],"dur":17.48},{"n":5,"photo":"c035","trap":"verb","ans":"B","opts":[{"t":"A plant is hanging from the ceiling.","r":"ต้นไม้วางอยู่บนกองหนังสือ ไม่ได้แขวนจากเพดาน"},{"t":"A woman is lying on a sofa.","r":"ผู้หญิงนอนอยู่บนโซฟา"},{"t":"Some books are being put on a shelf.","r":"หนังสือวางอยู่บนโต๊ะ และไม่มีใครกำลังจัดเก็บ"},{"t":"A woman is opening a window.","r":"หน้าต่างอยู่ในภาพ แต่เธอไม่ได้เปิดหน้าต่าง"}],"kw":["lying","sofa","window"],"tip":"ภาพมีของหลายอย่าง ให้ฟังว่าประโยคพูดถึงคนหรือของ แล้วเช็กกริยาทีละคำ lying = นอน hanging = แขวน","wh":[960,640],"cues":[[1.77,4.59],[5.59,8.25],[9.25,11.8],[12.8,15.45]],"dur":16.45},{"n":6,"photo":"c044","trap":"state","ans":"D","opts":[{"t":"A child is making a bed.","r":"make a bed คือจัดที่นอน แต่เด็กกำลังอ่านหนังสือ"},{"t":"A child is closing a book.","r":"หนังสือยังเปิดอยู่ ไม่ได้ปิด"},{"t":"Some books are stacked on a shelf.","r":"ไม่มีชั้นหนังสือในภาพ"},{"t":"A child is holding a book open.","r":"เด็กถือหนังสือกางอยู่"}],"kw":["holding","book","open"],"tip":"open กับ closing เป็นคำตรงข้ามที่ออกบ่อย ฟังให้ออกว่าเป็นสภาพ (open) หรือการกระทำ (closing)","wh":[960,640],"cues":[[1.82,3.36],[4.36,6.13],[7.13,9.01],[10.01,12.07]],"dur":13.07},{"n":7,"photo":"c050","trap":"number","ans":"D","opts":[{"t":"A boat is being pulled onto a beach.","r":"เรืออยู่ในน้ำ ไม่ได้ถูกลากขึ้นฝั่ง"},{"t":"Both women are seated.","r":"คนหนึ่งยืน คนหนึ่งนั่ง จึงผิดตรงคำว่า Both"},{"t":"Some people are fishing from a bridge.","r":"ไม่มีสะพานและไม่มีคนตกปลา"},{"t":"One woman is rowing a boat.","r":"ผู้หญิงที่ยืนด้านหลังกำลังพายเรือ"}],"kw":["one","rowing","both"],"tip":"คำบอกจำนวน one / both / all / each มักเป็นตัวตัดสิน ถ้าได้ยิน Both ให้เช็กว่าทั้งสองคนทำแบบนั้นจริงไหม","wh":[960,640],"cues":[[1.82,4.48],[5.48,7.42],[8.42,10.92],[11.92,14.13]],"dur":15.13},{"n":8,"photo":"c060","trap":"verb","ans":"B","opts":[{"t":"A woman is swimming in a lake.","r":"เธออยู่บนเรือ ไม่ได้ว่ายน้ำ"},{"t":"A woman is sitting in a canoe.","r":"ผู้หญิงนั่งอยู่ในเรือแคนู"},{"t":"A woman is tying a boat to a dock.","r":"ไม่มีท่าเรือและไม่ได้ผูกเรือ"},{"t":"A canoe is being carried to the water.","r":"เรือลอยอยู่ในน้ำแล้ว ไม่มีใครแบกเรือ"}],"kw":["sitting in","canoe","lake"],"tip":"canoe, boat, lake, dock เป็นคำในภาพแนวทะเลสาบที่ออกบ่อย ฟังกริยาก่อนว่า sitting หรือ swimming","wh":[960,640],"cues":[[1.75,4.01],[5.01,7.29],[8.29,11.02],[12.02,14.6]],"dur":15.6},{"n":9,"photo":"c079","trap":"verb","ans":"B","opts":[{"t":"A man is walking a dog on a street.","r":"สุนัขนั่งอยู่ข้างเขา ไม่ได้เดินบนถนน"},{"t":"A man is sitting on the grass.","r":"ผู้ชายนั่งอยู่บนพื้นหญ้า"},{"t":"A man is painting a wall.","r":"เขาพิงผนังอยู่ ไม่ได้ทาสี"},{"t":"A man is mowing the grass.","r":"มีหญ้าในภาพ แต่ mow คือตัดหญ้า ซึ่งเขาไม่ได้ทำ"}],"kw":["sitting on","grass","mowing"],"tip":"คำนามเดียวกัน (grass) มากับกริยาต่างกัน (sitting / mowing) ให้จับกริยาให้ได้ เพราะเป็นตัวตัดสิน","wh":[960,638],"cues":[[1.75,3.9],[4.9,6.67],[7.67,9.3],[10.3,11.89]],"dur":12.89},{"n":10,"photo":"c080","trap":"state","ans":"C","opts":[{"t":"Some people are walking along the road.","r":"ไม่มีคนเดิน"},{"t":"Some bicycles are parked in a row.","r":"จักรยานกำลังวิ่ง ไม่ได้จอดอยู่"},{"t":"Two people are riding bicycles.","r":"คน 2 คนกำลังปั่นจักรยาน"},{"t":"Two people are repairing a bicycle.","r":"ไม่ได้ซ่อมจักรยาน"}],"kw":["riding","bicycles","parked"],"tip":"parked (จอดอยู่) กับ riding (กำลังขี่) ต่างกันที่ว่าของนิ่งหรือเคลื่อนที่ ดูภาพให้ออกก่อนเสียงเริ่ม","wh":[960,638],"cues":[[1.73,3.79],[4.79,6.96],[7.96,9.99],[10.99,13.14]],"dur":14.14},{"n":11,"photo":"c111","trap":"being","ans":"A","opts":[{"t":"A person is standing on railroad tracks.","r":"คนยืนอยู่บนรางรถไฟ"},{"t":"A person is tying his shoes.","r":"ไม่ได้ผูกเชือกรองเท้า"},{"t":"Some tracks are being repaired.","r":"ไม่มีคนกำลังซ่อมราง"},{"t":"A train is pulling into a station.","r":"ไม่มีรถไฟในภาพ"}],"kw":["standing on","tracks","tying"],"tip":"ถ้าได้ยิน is being + V3 (are being repaired) ต้องมีคนกำลังทำอยู่ในภาพ ในภาพนี้ไม่มีใครซ่อมเลย","wh":[960,540],"cues":[[1.8,4.93],[5.93,8.21],[9.21,11.52],[12.52,15.25]],"dur":16.25},{"n":12,"photo":"c113","trap":"state","ans":"B","opts":[{"t":"A man is waiting on a platform.","r":"ไม่มีชานชาลา"},{"t":"A man is walking along the tracks.","r":"ผู้ชายกำลังเดินตามรางรถไฟ"},{"t":"Some trees are being planted.","r":"ไม่มีคนกำลังปลูกต้นไม้"},{"t":"A man is taking a photograph.","r":"ถือกล้องไว้ข้างตัว แต่ไม่ได้ถ่ายรูป"}],"kw":["walking along","tracks","camera"],"tip":"ถือของอยู่ (holding a camera) ไม่เท่ากับกำลังใช้ของนั้น (taking a photograph) เป็นกับดักที่ออกบ่อยมาก","wh":[960,540],"cues":[[1.82,4.01],[5.01,7.31],[8.31,10.29],[11.29,13.42]],"dur":14.42},{"n":13,"photo":"c144","trap":"verb","ans":"B","opts":[{"t":"Someone is cleaning a keyboard.","r":"keyboard ของเปียโนอยู่ในภาพ แต่ไม่ได้ทำความสะอาด"},{"t":"Someone is playing a piano.","r":"มือกำลังเล่นเปียโน"},{"t":"Someone is typing on a laptop.","r":"ไม่มีแล็ปท็อป"},{"t":"A piano is being moved.","r":"ไม่มีใครกำลังยกเปียโน"}],"kw":["playing","piano","keyboard"],"tip":"คำว่า keyboard ใช้ได้ทั้งเปียโนและคอมพิวเตอร์ อย่าตอบเพราะได้ยินคำที่ตรงกับภาพ ให้ฟังว่ากริยาตรงไหม","wh":[960,640],"cues":[[1.97,4.14],[5.14,7.29],[8.29,10.62],[11.62,13.64]],"dur":14.64},{"n":14,"photo":"c145","trap":"number","ans":"D","opts":[{"t":"Some columns are being painted.","r":"ไม่มีใครกำลังทาสีเสา"},{"t":"A crowd has gathered in a hall.","r":"crowd คือคนจำนวนมาก แต่ในภาพมีคนเดียว"},{"t":"A man is taking off his backpack.","r":"กระเป๋ายังสะพายอยู่"},{"t":"A person is standing in a large hall.","r":"มีคนหนึ่งยืนอยู่ในห้องโถงกว้าง"}],"kw":["standing","large hall","crowd"],"tip":"ระวังคำที่บอกจำนวนแฝง เช่น crowd, group, everyone ถ้าในภาพมีคนเดียว ตัดตัวเลือกพวกนี้ทันที","wh":[960,640],"cues":[[1.9,3.83],[4.83,6.83],[7.83,10.1],[11.1,13.68]],"dur":14.68},{"n":15,"photo":"c148","trap":"absent","ans":"C","opts":[{"t":"Some trees are being trimmed.","r":"ไม่มีคนตัดแต่งต้นไม้"},{"t":"A man is lighting a fire.","r":"มีแสง แต่ไม่มีไฟหรือกองไฟ"},{"t":"A man is holding a flashlight.","r":"ผู้ชายถือไฟฉายส่องขึ้นฟ้า"},{"t":"A man is looking through a telescope.","r":"ไม่มีกล้องโทรทรรศน์"}],"kw":["holding","flashlight","light"],"tip":"คำว่า light / lighting ฟังคล้ายกับแสงในภาพ แต่ lighting a fire คือจุดไฟ ต้องมีกองไฟในภาพ","wh":[960,669],"cues":[[1.9,4.4],[5.4,8.09],[9.09,11.96],[12.96,16.05]],"dur":17.05},{"n":16,"photo":"c154","trap":"being","ans":"C","opts":[{"t":"Some players are kicking a ball.","r":"ไม่มีผู้เล่นในสนาม"},{"t":"A fence surrounds a parking lot.","r":"ไม่มีรั้วหรือที่จอดรถ"},{"t":"A path runs through a field.","r":"มีทางเดินตัดผ่านสนามหญ้า"},{"t":"A field is being mowed.","r":"ไม่มีคนกำลังตัดหญ้า"}],"kw":["path","runs through","field"],"tip":"ภาพมุมสูงแบบนี้มักตอบด้วยประโยคบอกตำแหน่ง เช่น A path runs through... หรือ ... leads to ... ไม่ใช่ประโยคที่มีคนทำกิจกรรม","wh":[960,539],"cues":[[1.9,4.13],[5.13,7.96],[8.96,11.45],[12.45,14.77]],"dur":15.77},{"n":17,"photo":"c162","trap":"place","ans":"B","opts":[{"t":"A person is sailing a boat.","r":"ไม่มีเรือ"},{"t":"A person is standing on top of a rock.","r":"คนยืนอยู่บนยอดหิน"},{"t":"Some people are swimming in the ocean.","r":"ไม่มีคนว่ายน้ำ"},{"t":"A person is climbing down a ladder.","r":"ไม่มีบันได"}],"kw":["standing","on top of","rock"],"tip":"คำบอกตำแหน่ง on top of, next to, in front of สำคัญมาก ให้ฟังว่าคนอยู่ตรงไหนของภาพ","wh":[960,640],"cues":[[2.01,3.69],[4.69,6.98],[7.98,9.97],[10.97,13.08]],"dur":14.08},{"n":18,"photo":"c191","trap":"state","ans":"C","opts":[{"t":"A man is putting on a pair of gloves.","r":"สวมถุงมืออยู่แล้ว ไม่ได้กำลังสวม"},{"t":"Some tools are being put in a box.","r":"ไม่มีใครกำลังเก็บเครื่องมือ"},{"t":"A man is welding some metal.","r":"ผู้ชายกำลังเชื่อมโลหะ มีประกายไฟ"},{"t":"A man is painting a wall.","r":"ไม่ได้ทาสี"}],"kw":["welding","metal","gloves"],"tip":"wearing = สวมอยู่ ส่วน putting on = กำลังสวม ถ้าในภาพใส่ถุงมืออยู่แล้วแต่ได้ยิน putting on ให้ตัดทิ้ง","wh":[960,640],"cues":[[1.84,4.27],[5.27,7.72],[8.72,11.13],[12.13,14.27]],"dur":15.27},{"n":19,"photo":"c223","trap":"absent","ans":"B","opts":[{"t":"Some snow is being cleared from the road.","r":"ไม่มีคนกำลังกวาดหิมะ"},{"t":"A woman is riding a skateboard down a road.","r":"ผู้หญิงเล่นสเกตบอร์ดบนถนน"},{"t":"A car is parked on the side of the road.","r":"ไม่มีรถในภาพ"},{"t":"A woman is crossing a bridge.","r":"ไม่มีสะพาน"}],"kw":["riding","skateboard","road"],"tip":"ตัวเลือกที่พูดถึงของที่ไม่มีในภาพ (car, bridge) ตัดได้ทันที ไม่ต้องคิดเรื่องกริยา","wh":[960,640],"cues":[[1.92,4.29],[5.29,8.17],[9.17,11.69],[12.69,14.75]],"dur":15.75},{"n":20,"photo":"c253","trap":"verb","ans":"D","opts":[{"t":"A vendor is closing an umbrella.","r":"ร่มกางอยู่ ไม่มีใครกำลังหุบ"},{"t":"A cart is being pushed across the street.","r":"รถเข็นจอดอยู่กับที่ ไม่มีใครเข็น"},{"t":"Some customers are sitting at tables.","r":"ลูกค้ายืนอยู่ ไม่มีโต๊ะ"},{"t":"Some people are gathered around a food cart.","r":"คนยืนรวมกันรอบรถขายอาหาร"}],"kw":["gathered around","cart","customers"],"tip":"gathered around แปลว่ารวมตัวกันรอบ ๆ เป็นวลีที่ใช้บรรยายภาพคนเยอะบ่อยมาก","wh":[960,640],"cues":[[1.88,3.94],[4.94,7.37],[8.37,10.57],[11.57,14.31]],"dur":15.31},{"n":21,"photo":"c260","trap":"verb","ans":"A","opts":[{"t":"A child is playing with bubbles.","r":"เด็กกำลังเล่นฟองสบู่"},{"t":"A child is washing a window.","r":"ไม่ได้ล้างหน้าต่าง"},{"t":"A child is cooking on a grill.","r":"มีเตาย่างในภาพ แต่เด็กไม่ได้ทำอาหาร"},{"t":"A hose is being rolled up.","r":"สายยางพันอยู่แล้ว ไม่มีใครกำลังม้วน"}],"kw":["playing with","bubbles","grill"],"tip":"ข้อสอบชอบเอาของที่อยู่ด้านหลังภาพ (grill, hose) มาใส่ในตัวเลือก ให้ดูว่าคนในภาพทำอะไรกับของนั้นจริงไหม","wh":[960,640],"cues":[[1.99,3.79],[4.79,6.64],[7.64,9.49],[10.49,12.12]],"dur":13.12},{"n":22,"photo":"c262","trap":"state","ans":"A","opts":[{"t":"A man is holding a child in his arms.","r":"ผู้ชายอุ้มเด็กไว้"},{"t":"A man is lighting a candle.","r":"สิ่งที่ถือคือดอกไม้ไฟ ไม่มีเทียน"},{"t":"A man is putting on a watch.","r":"สวมนาฬิกาอยู่แล้ว ไม่ได้กำลังใส่"},{"t":"A child is sleeping in a bed.","r":"เด็กอยู่ในอ้อมแขน ไม่ได้นอนบนเตียง"}],"kw":["holding","child","arms"],"tip":"holding ... in his arms = อุ้ม เป็นวลีที่ควรจำ ส่วน putting on ต้องเห็นการกระทำกำลังสวม","wh":[481,720],"cues":[[1.97,5.02],[6.02,8.41],[9.41,11.6],[12.6,15.16]],"dur":16.16},{"n":23,"photo":"c278","trap":"number","ans":"C","opts":[{"t":"Some boats are tied to a dock.","r":"ไม่มีเรือ"},{"t":"Some people are building a pier.","r":"ท่าเรือมีอยู่แล้ว ไม่มีใครกำลังสร้าง"},{"t":"A man is jumping into the water.","r":"มีผู้ชายกำลังกระโดดลงน้ำ"},{"t":"Everyone is swimming in the sea.","r":"หลายคนยืนอยู่บนท่าเรือ ไม่ได้ว่ายน้ำทุกคน"}],"kw":["jumping into","water","everyone"],"tip":"everyone / all / both ต้องจริงกับทุกคนในภาพ ถ้ามีแค่บางคนทำ ตัวเลือกนั้นผิด","wh":[960,640],"cues":[[2.01,3.9],[4.9,6.84],[7.84,10.08],[11.08,12.99]],"dur":13.99},{"n":24,"photo":"c280","trap":"sound","ans":"A","opts":[{"t":"A person is holding some beans in one hand.","r":"มือกำลังกำเมล็ดกาแฟ"},{"t":"A person is pouring coffee into a cup.","r":"เป็นเมล็ดกาแฟ ไม่ใช่กาแฟในแก้ว"},{"t":"A ring is being put on a finger.","r":"แหวนสวมอยู่แล้ว ไม่มีใครกำลังใส่"},{"t":"Some beans are being planted in a field.","r":"ไม่มีทุ่งและไม่มีการปลูก"}],"kw":["holding","beans","hand"],"tip":"คำว่า coffee ทำให้นึกถึงเมล็ดในภาพ แต่ pouring coffee คือรินกาแฟ ต้องดูว่าในภาพมีแก้วไหม","wh":[960,640],"cues":[[1.99,5.18],[6.18,8.91],[9.91,12.39],[13.39,16.28]],"dur":17.28},{"n":25,"photo":"c291","trap":"verb","ans":"A","opts":[{"t":"A man is sitting by a window.","r":"ผู้ชายนั่งอยู่ริมหน้าต่าง"},{"t":"A man is closing the curtains.","r":"ไม่ได้ปิดม่าน"},{"t":"A man is cleaning a window.","r":"ไม่ได้เช็ดกระจก"},{"t":"A man is lying on a bed.","r":"นั่งอยู่บนขอบหน้าต่าง ไม่ใช่นอนบนเตียง"}],"kw":["sitting","by a window","cleaning"],"tip":"by a window = ข้างหน้าต่าง ฟังบุพบทให้ชัด แล้วค่อยเช็กว่ากริยาตรงกับท่าทางในภาพ","wh":[960,572],"cues":[[2.01,3.79],[4.79,6.84],[7.84,9.71],[10.71,12.48]],"dur":13.48},{"n":26,"photo":"c303","trap":"verb","ans":"D","opts":[{"t":"Two people are surfing on a wave.","r":"คนหนึ่งถือกระดาน แต่ยังเดินอยู่บนทราย"},{"t":"Some people are lying on the sand.","r":"ไม่มีใครนอนบนทราย"},{"t":"A boat is being pulled onto the beach.","r":"ไม่มีเรือ"},{"t":"Two people are walking on a beach.","r":"2 คนกำลังเดินอยู่บนชายหาด"}],"kw":["walking","beach","surfing"],"tip":"ถือกระดานโต้คลื่นไม่ได้แปลว่ากำลังโต้คลื่น ให้แยกของที่ถือกับกิจกรรมที่ทำ","wh":[960,640],"cues":[[2.01,4.8],[5.8,8.74],[9.74,12.76],[13.76,16.58]],"dur":17.58},{"n":27,"photo":"c306","trap":"being","ans":"A","opts":[{"t":"Some papers have been posted on a wall.","r":"มีกระดาษติดอยู่บนผนัง"},{"t":"A man is putting on his glasses.","r":"สวมแว่นอยู่แล้ว ไม่ได้กำลังสวม"},{"t":"A man is standing at a desk.","r":"เขานั่งอยู่ ไม่ได้ยืน"},{"t":"A man is posting notes on a board.","r":"กระดาษติดอยู่แล้ว ผู้ชายไม่ได้กำลังติด"}],"kw":["have been posted","wall","glasses"],"tip":"have been + V3 = ถูกทำไว้แล้ว (สภาพ) เป็นรูปที่ถูกบ่อยกับของในภาพ ส่วน is posting = กำลังทำ ต้องเห็นการกระทำ","wh":[960,640],"cues":[[2.05,5.05],[6.05,8.74],[9.74,12.27],[13.27,16.23]],"dur":17.23},{"n":28,"photo":"c309","trap":"verb","ans":"B","opts":[{"t":"Some trees are being cut down.","r":"ไม่มีใครตัดต้นไม้"},{"t":"A man is holding a book.","r":"ผู้ชายถือหนังสือกางอยู่"},{"t":"A woman is taking off her scarf.","r":"ยังพันผ้าพันคออยู่"},{"t":"Two people are walking through a field.","r":"ทั้งสองนั่งอยู่ ไม่ได้เดิน"}],"kw":["holding","book","sitting"],"tip":"ภาพ 2 คน ให้ดูว่าแต่ละคนทำอะไร ตัวเลือกที่ถูกมักพูดถึงคนเดียวอย่างเจาะจง เช่น A man is ...","wh":[481,720],"cues":[[1.97,3.65],[4.65,6.24],[7.24,9.26],[10.26,12.38]],"dur":13.38},{"n":29,"photo":"c312","trap":"general","ans":"B","opts":[{"t":"A man is sitting on the sand.","r":"ผู้ชายยืนอยู่"},{"t":"A man is holding a bag.","r":"ผู้ชายถือกระเป๋าไว้ในมือ"},{"t":"A man is carrying a bag on his back.","r":"ถืออยู่ในมือ ไม่ได้สะพายหลัง"},{"t":"A man is packing a suitcase.","r":"ไม่ใช่กระเป๋าเดินทางแบบลาก"}],"kw":["holding","bag","on his back"],"tip":"bag เป็นคำกว้างที่ใช้ได้กับกระเป๋าทุกแบบ ส่วน suitcase เจาะจงเกินไป ตัวเลือกที่ใช้คำกว้างมักปลอดภัยกว่า","wh":[960,639],"cues":[[1.99,4.16],[5.16,7.16],[8.16,10.77],[11.77,14.09]],"dur":15.09},{"n":30,"photo":"c328","trap":"verb","ans":"D","opts":[{"t":"A woman is opening her bag.","r":"ถือกระเป๋าอยู่ แต่ไม่ได้เปิด"},{"t":"A woman is painting a wall.","r":"ไม่ได้ทาสีผนัง"},{"t":"A woman is walking down some stairs.","r":"ไม่มีบันได"},{"t":"A woman is standing next to a wall.","r":"ผู้หญิงยืนอยู่ข้างผนังปูน"}],"kw":["standing","next to","wall"],"tip":"ภาพคนยืนเฉย ๆ คำตอบมักเป็นประโยคง่าย ๆ อย่าง is standing / is facing ฟังตำแหน่งต่อท้ายให้ครบ","wh":[960,640],"cues":[[1.82,3.91],[4.91,7.0],[8.0,10.56],[11.56,13.92]],"dur":14.92},{"n":31,"photo":"c336","trap":"verb","ans":"B","opts":[{"t":"Some customers are paying at a register.","r":"ไม่เห็นการจ่ายเงิน"},{"t":"A cook is preparing food behind a counter.","r":"พ่อครัวกำลังทำอาหารหลังเคาน์เตอร์"},{"t":"Signs are being hung above a shop.","r":"ป้ายติดอยู่แล้ว ไม่มีใครกำลังแขวน"},{"t":"A man is washing dishes in a sink.","r":"ไม่มีอ่างล้างจาน"}],"kw":["preparing food","counter","signs"],"tip":"ป้ายหรือของที่ติดอยู่แล้วถ้ามาในรูป are being hung มักผิด ให้มองหาการกระทำของคนในภาพแทน","wh":[960,640],"cues":[[1.97,4.29],[5.29,7.93],[8.93,10.98],[11.98,14.15]],"dur":15.15},{"n":32,"photo":"c353","trap":"state","ans":"A","opts":[{"t":"A woman is drinking through a straw.","r":"ผู้หญิงดูดเครื่องดื่มด้วยหลอด"},{"t":"A woman is taking off her jacket.","r":"ยังสวมแจ็กเก็ตอยู่"},{"t":"A woman is pouring a drink.","r":"ไม่ได้รินเครื่องดื่ม"},{"t":"A woman is swimming in the sea.","r":"อยู่ริมทะเล ไม่ได้ว่ายน้ำ"}],"kw":["drinking","straw","pouring"],"tip":"drinking กับ pouring เป็นกริยาเกี่ยวกับเครื่องดื่มเหมือนกัน ต้องดูว่ากำลังดื่มหรือกำลังริน","wh":[480,720],"cues":[[2.03,3.94],[4.94,7.08],[8.08,9.75],[10.75,12.48]],"dur":13.48},{"n":33,"photo":"c369","trap":"absent","ans":"D","opts":[{"t":"A man is hiking up a mountain.","r":"ยืนอยู่บนพื้นราบ ไม่ได้เดินขึ้นเขา"},{"t":"A camera has been set on a tripod.","r":"ไม่มีขาตั้งกล้อง"},{"t":"A man is repairing a camera.","r":"ไม่ได้ซ่อมกล้อง"},{"t":"A man is holding a camera.","r":"ผู้ชายถือกล้องไว้ด้วยสองมือ"}],"kw":["holding","camera","tripod"],"tip":"tripod (ขาตั้งกล้อง) เป็นคำศัพท์ภาพที่ออกบ่อย ถ้าในภาพไม่มีของชิ้นนั้น ตัดตัวเลือกทิ้งได้เลย","wh":[960,639],"cues":[[2.03,4.4],[5.4,8.34],[9.34,11.88],[12.88,15.4]],"dur":16.4},{"n":34,"photo":"c370","trap":"being","ans":"A","opts":[{"t":"A keyboard has been placed on a desk.","r":"มีคีย์บอร์ดวางอยู่บนโต๊ะ"},{"t":"A computer is being repaired.","r":"ไม่มีใครกำลังซ่อมคอมพิวเตอร์"},{"t":"Some papers are being thrown away.","r":"ไม่มีใครกำลังทิ้งกระดาษ"},{"t":"A person is plugging in a lamp.","r":"ไม่ได้เสียบปลั๊กโคมไฟ"}],"kw":["keyboard","has been placed","desk"],"tip":"has been placed = ถูกวางไว้ ใช้กับของที่อยู่นิ่ง ๆ ได้เสมอ ส่วน is being repaired ต้องเห็นคนกำลังซ่อม","wh":[960,540],"cues":[[2.01,4.24],[5.24,7.28],[8.28,10.45],[11.45,13.43]],"dur":14.43},{"n":35,"photo":"c380","trap":"verb","ans":"C","opts":[{"t":"Some fruit is being sliced.","r":"ไม่มีใครกำลังหั่นผลไม้"},{"t":"A person is pouring juice into a glass.","r":"ไม่ได้รินน้ำ"},{"t":"A person is holding a glass with both hands.","r":"ถือแก้วด้วยสองมือ"},{"t":"A person is washing a glass.","r":"ไม่ได้ล้างแก้ว"}],"kw":["holding","glass","both hands"],"tip":"ฟังให้ครบทั้งวลี with both hands ข้อสอบมักใส่รายละเอียดท้ายประโยคเพื่อให้แน่ใจว่าตรงภาพจริง","wh":[480,720],"cues":[[2.03,4.03],[5.03,8.0],[9.0,12.26],[13.26,15.54]],"dur":16.54},{"n":36,"photo":"c393","trap":"verb","ans":"A","opts":[{"t":"A man is seated in an armchair outdoors.","r":"ผู้ชายนั่งบนเก้าอี้นวมกลางแจ้ง"},{"t":"A man is putting on his boots.","r":"สวมรองเท้าบูตอยู่แล้ว"},{"t":"A man is raking some leaves.","r":"มีใบไม้ในภาพ แต่ไม่ได้กวาดใบไม้"},{"t":"A chair is being carried across a yard.","r":"เก้าอี้ตั้งอยู่กับที่ ไม่มีใครยก"}],"kw":["seated","armchair","raking"],"tip":"seated เท่ากับ sitting ข้อสอบชอบใช้ is seated แทน is sitting จำไว้ว่าความหมายเดียวกัน","wh":[960,640],"cues":[[2.09,4.77],[5.77,7.74],[8.74,10.7],[11.7,14.24]],"dur":15.24},{"n":37,"photo":"c405","trap":"place","ans":"A","opts":[{"t":"A woman is standing in front of a railing.","r":"ผู้หญิงยืนอยู่หน้าราวกั้น"},{"t":"A woman is leaning over a railing.","r":"เธอยืนหันหลังให้ราว ไม่ได้ชะโงกข้ามราว"},{"t":"A woman is putting on a sweater.","r":"สวมเสื้อไหมพรมอยู่แล้ว"},{"t":"A woman is cleaning her glasses.","r":"ถือแว่นแต่ไม่ได้เช็ด"}],"kw":["in front of","railing","leaning over"],"tip":"คำเดียวกัน (railing) มากับท่าทางต่างกัน in front of = ยืนหน้า ส่วน leaning over = ชะโงกข้าม ฟังวลีบุพบทให้ครบ","wh":[960,640],"cues":[[2.09,5.34],[6.34,9.3],[10.3,13.17],[14.17,17.13]],"dur":18.13},{"n":38,"photo":"c406","trap":"being","ans":"D","opts":[{"t":"A woman is climbing over a fence.","r":"เธอนั่งนิ่ง ไม่ได้ปีน"},{"t":"Some chairs are being set up on a terrace.","r":"เก้าอี้ตั้งอยู่ด้านหลังแล้ว ไม่มีใครกำลังจัด"},{"t":"A woman is tying her shoelaces.","r":"ไม่ได้ผูกเชือกรองเท้า"},{"t":"A woman is sitting on a low wall.","r":"ผู้หญิงนั่งอยู่บนกำแพงเตี้ย"}],"kw":["sitting on","low wall","chairs"],"tip":"ของด้านหลังภาพ (chairs) มักมากับ is being + V3 เพื่อหลอก ถ้าไม่มีคนกำลังจัด ตัดทิ้ง","wh":[960,640],"cues":[[1.99,4.64],[5.64,8.64],[9.64,12.43],[13.43,16.46]],"dur":17.46},{"n":39,"photo":"c407","trap":"verb","ans":"C","opts":[{"t":"A woman is hanging up her jacket.","r":"ยังสวมเสื้อแจ็กเก็ตอยู่"},{"t":"A woman is washing some windows.","r":"ไม่ได้เช็ดกระจก"},{"t":"A woman is standing in front of some windows.","r":"ผู้หญิงยืนอยู่หน้ากระจกบานใหญ่"},{"t":"Some cars are being washed.","r":"รถเห็นแค่ในเงาสะท้อน และไม่มีใครกำลังล้าง"}],"kw":["standing","in front of","windows"],"tip":"windows กับ washing ออกเสียงขึ้นต้นคล้ายกัน ระวังฟังเร็วแล้วจับคำผิด ให้ฟังกริยาหลัก is standing ก่อน","wh":[960,640],"cues":[[2.07,4.02],[5.02,7.16],[8.16,10.87],[11.87,13.55]],"dur":14.55},{"n":40,"photo":"c408","trap":"state","ans":"A","opts":[{"t":"A woman is sitting in an armchair.","r":"ผู้หญิงนั่งอยู่บนเก้าอี้นวม"},{"t":"A lamp is being repaired.","r":"ไม่มีใครกำลังซ่อมโคมไฟ"},{"t":"A woman is taking off her sunglasses.","r":"ยังสวมแว่นกันแดดอยู่"},{"t":"A woman is moving some furniture.","r":"ไม่ได้ยกเฟอร์นิเจอร์"}],"kw":["sitting in","armchair","sunglasses"],"tip":"ภาพร้านที่มีของเยอะ ตัวเลือกหลอกมักหยิบของในร้าน (lamp, furniture) มาพูด ให้ยึดสิ่งที่คนในภาพทำอยู่จริง","wh":[960,640],"cues":[[1.82,4.27],[5.27,7.38],[8.38,11.15],[12.15,14.6]],"dur":15.6},{"n":41,"photo":"c409","trap":"absent","ans":"D","opts":[{"t":"A road is being paved.","r":"ไม่มีคนกำลังลาดยางถนน"},{"t":"Some cars are passing by.","r":"ไม่มีรถในภาพ"},{"t":"A woman is crossing a bridge.","r":"ไม่มีสะพาน"},{"t":"A woman is standing on a road.","r":"ผู้หญิงยืนอยู่บนถนน"}],"kw":["standing","road","passing by"],"tip":"ถนนว่าง ๆ มักมีตัวเลือกพูดถึงรถหรือการก่อสร้าง ถ้าในภาพไม่มีรถและไม่มีคนงาน ตัดได้เลย","wh":[480,720],"cues":[[1.97,3.93],[4.93,6.93],[7.93,10.02],[11.02,13.22]],"dur":14.22},{"n":42,"photo":"c410","trap":"state","ans":"D","opts":[{"t":"A woman is sitting on a bench.","r":"ไม่มีม้านั่ง"},{"t":"A woman is painting a fence.","r":"ไม่ได้ทาสีรั้ว"},{"t":"A woman is putting on sunglasses.","r":"สวมแว่นอยู่แล้ว ไม่ได้กำลังใส่"},{"t":"A woman is leaning on a rail.","r":"ผู้หญิงพิงราวเหล็กอยู่"}],"kw":["leaning on","rail","putting on"],"tip":"leaning on / leaning against = พิง เป็นท่าทางที่ออกบ่อยมาก จำคู่กับคำว่า rail, wall, fence","wh":[960,640],"cues":[[1.97,3.58],[4.58,6.42],[7.42,9.49],[10.49,12.36]],"dur":13.36},{"n":43,"photo":"c239","trap":"verb","ans":"C","opts":[{"t":"Some waves are crashing on a beach.","r":"ไม่เห็นชายหาด"},{"t":"A person is diving off a boat.","r":"ไม่มีเรือ"},{"t":"A person is swimming in the water.","r":"มีคนกำลังว่ายน้ำ"},{"t":"A person is fishing from a dock.","r":"ไม่มีท่าเรือและไม่มีคนตกปลา"}],"kw":["swimming","water","diving"],"tip":"ภาพที่มีน้ำ ตัวเลือกมักใช้กริยาเกี่ยวกับน้ำหลายแบบ (swim, dive, fish) ให้ดูว่าคนอยู่ในน้ำหรือบนเรือ","wh":[960,640],"cues":[[1.97,3.83],[4.83,6.76],[7.76,9.58],[10.58,12.51]],"dur":13.51},{"n":44,"photo":"c237","trap":"absent","ans":"D","opts":[{"t":"A man is driving a camper van.","r":"รถบ้านจอดอยู่ข้างหลัง ไม่มีคนขับ"},{"t":"A man is climbing a mountain.","r":"ภูเขาอยู่ไกล เขาไม่ได้ปีน"},{"t":"A van is being towed.","r":"ไม่มีรถลาก"},{"t":"A man is relaxing in some water.","r":"ผู้ชายแช่น้ำพักผ่อน"}],"kw":["relaxing","water","camper van"],"tip":"ของที่อยู่ไกล ๆ ในภาพ (mountain, van) ถูกเอามาเป็นตัวลวงบ่อย ให้ยึดคนที่อยู่ตรงกลางภาพเป็นหลัก","wh":[960,640],"cues":[[1.94,4.44],[5.44,7.91],[8.91,10.96],[11.96,14.8]],"dur":15.8},{"n":45,"photo":"c304","trap":"state","ans":"D","opts":[{"t":"A girl is putting on a scarf.","r":"พันผ้าอยู่แล้ว ไม่ได้กำลังพัน"},{"t":"A girl is planting a tree.","r":"ไม่มีต้นไม้ที่กำลังปลูก"},{"t":"A girl is running across a field.","r":"เธออยู่กับที่ ไม่ได้วิ่ง"},{"t":"A girl is crouching on the ground.","r":"เด็กผู้หญิงนั่งยอง ๆ บนพื้น"}],"kw":["crouching","ground","running"],"tip":"crouching / squatting = นั่งยอง ๆ เป็นคำท่าทางที่คนไทยมักไม่คุ้น ควรจำไว้","wh":[960,640],"cues":[[2.01,3.73],[4.73,6.48],[7.48,9.63],[10.63,12.8]],"dur":13.8},{"n":46,"photo":"c307","trap":"being","ans":"C","opts":[{"t":"Flowers are being arranged in a vase.","r":"ไม่มีแจกัน"},{"t":"Someone is watering some plants.","r":"ไม่ได้รดน้ำ"},{"t":"Someone is touching a flower.","r":"มีมือกำลังแตะดอกไม้"},{"t":"Someone is mowing a field.","r":"ไม่ได้ตัดหญ้า"}],"kw":["touching","flower","arranged"],"tip":"ภาพเห็นแค่มือ ให้ใช้คำว่า someone / a person และฟังกริยาที่เกี่ยวกับมือ เช่น touching, holding, reaching","wh":[481,720],"cues":[[2.05,4.67],[5.67,7.99],[8.99,11.14],[12.14,14.15]],"dur":15.15},{"n":47,"photo":"c341","trap":"state","ans":"A","opts":[{"t":"Some small stones are lying in a person's hand.","r":"มีหินก้อนเล็ก ๆ วางอยู่บนฝ่ามือ"},{"t":"A person is putting on a ring.","r":"สวมแหวนอยู่แล้ว"},{"t":"Some stones are being stacked on a table.","r":"ไม่มีโต๊ะ และไม่มีใครกองหิน"},{"t":"A person is throwing a stone into the water.","r":"ไม่ได้ขว้างหิน"}],"kw":["stones","lying in","hand"],"tip":"lying ใช้กับของที่วางอยู่ได้ด้วย ไม่ได้แปลว่านอนอย่างเดียว เช่น papers are lying on the desk","wh":[960,640],"cues":[[2.09,4.96],[5.96,7.86],[8.86,11.46],[12.46,15.31]],"dur":16.31},{"n":48,"photo":"c378","trap":"sound","ans":"B","opts":[{"t":"A person is washing his hands.","r":"ไม่ได้ล้างมือ"},{"t":"A person is holding a starfish.","r":"มือถือปลาดาวอยู่"},{"t":"A person is catching a fish.","r":"starfish กับ fish เสียงคล้ายกัน แต่ไม่ได้จับปลา"},{"t":"Some shells are being collected on a beach.","r":"ไม่มีเปลือกหอยและชายหาด"}],"kw":["holding","starfish","fish"],"tip":"คำที่ซ้อนอยู่ในคำยาว (fish ใน starfish) เป็นกับดักเสียงแบบหนึ่ง ฟังคำให้จบทั้งคำก่อนตัดสิน","wh":[960,640],"cues":[[1.92,4.81],[5.81,8.77],[9.77,12.44],[13.44,16.71]],"dur":17.71},{"n":49,"photo":"c359","trap":"state","ans":"B","opts":[{"t":"Someone is paying at a counter.","r":"ไม่มีเคาน์เตอร์"},{"t":"Someone is holding an ice cream cone.","r":"มือถือไอศกรีมโคน"},{"t":"An ice cream cone has been dropped on the floor.","r":"ไอศกรีมยังอยู่ในมือ"},{"t":"Someone is scooping ice cream into a bowl.","r":"ไม่มีชาม ไม่ได้ตักไอศกรีม"}],"kw":["holding","ice cream cone","scooping"],"tip":"ภาพที่มีของชิ้นเดียว ตัวเลือกที่ถูกมักเป็น holding + ของชิ้นนั้น ตัวลวงจะเปลี่ยนกริยาหรือสภาพของ","wh":[480,720],"cues":[[2.01,4.42],[5.42,8.5],[9.5,13.02],[14.02,17.32]],"dur":18.32},{"n":50,"photo":"c255","trap":"verb","ans":"A","opts":[{"t":"A man is holding something above his head.","r":"ผู้ชายยกของขึ้นเหนือศีรษะ"},{"t":"A man is climbing a ladder.","r":"ไม่มีบันได"},{"t":"A man is putting out a fire.","r":"มีควัน แต่ไม่ได้ดับไฟ"},{"t":"A man is lying on some rocks.","r":"เขายืนอยู่ ไม่ได้นอน"}],"kw":["holding","above his head","putting out"],"tip":"put out a fire = ดับไฟ เป็น phrasal verb ที่ควรรู้ ภาพมีควันจึงทำให้หลงตอบได้ง่าย","wh":[960,640],"cues":[[1.88,4.34],[5.34,7.04],[8.04,9.83],[10.83,12.82]],"dur":13.82},{"n":51,"photo":"c242","trap":"verb","ans":"C","opts":[{"t":"Some equipment is being packed into a box.","r":"ไม่มีกล่อง"},{"t":"A person is playing a guitar.","r":"ไม่มีกีตาร์"},{"t":"A person is adjusting some equipment.","r":"มือกำลังปรับปุ่มบนเครื่องเสียง"},{"t":"A person is plugging in a cable.","r":"ไม่เห็นการเสียบสาย"}],"kw":["adjusting","equipment","plugging in"],"tip":"equipment เป็นคำกว้างที่ข้อสอบชอบใช้แทนเครื่องมือหรือเครื่องเสียง ถ้าไม่รู้ชื่อเครื่องเฉพาะ ให้มองหาคำกว้างนี้","wh":[960,640],"cues":[[1.94,4.87],[5.87,8.13],[9.13,11.94],[12.94,15.35]],"dur":16.35},{"n":52,"photo":"c243","trap":"state","ans":"C","opts":[{"t":"Some people are leaving a theater.","r":"คนหันหน้าเข้าเวที ไม่ได้ออกไป"},{"t":"Some people are sitting in rows of seats.","r":"ทุกคนยืนอยู่ ไม่มีที่นั่ง"},{"t":"A crowd has gathered in front of a stage.","r":"คนจำนวนมากรวมตัวกันหน้าเวที"},{"t":"A stage is being built.","r":"เวทีสร้างเสร็จแล้ว มีการแสดงอยู่"}],"kw":["crowd","gathered","stage"],"tip":"A crowd has gathered = มีฝูงชนรวมตัวกันแล้ว ใช้กับภาพคนจำนวนมากบ่อยมาก","wh":[960,640],"cues":[[2.03,4.16],[5.16,7.64],[8.64,11.3],[12.3,14.25]],"dur":15.25},{"n":53,"photo":"c259","trap":"state","ans":"D","opts":[{"t":"Some players are leaving the field.","r":"ผู้เล่นยังอยู่ในสนาม"},{"t":"The seats are completely empty.","r":"อัฒจันทร์มีคนดูเต็ม"},{"t":"A field is being mowed.","r":"ไม่มีใครกำลังตัดหญ้า"},{"t":"A man is watching a game from the stands.","r":"ผู้ชายยืนดูการแข่งขันจากอัฒจันทร์"}],"kw":["watching","game","stands"],"tip":"the stands = อัฒจันทร์ คำนี้ออกกับภาพสนามกีฬาบ่อย ฟัง completely empty แล้วเช็กว่ามีคนในภาพไหม","wh":[480,720],"cues":[[1.97,3.82],[4.82,6.84],[7.84,9.33],[10.33,12.82]],"dur":13.82},{"n":54,"photo":"c107","trap":"absent","ans":"A","opts":[{"t":"A surfer is riding a wave.","r":"นักโต้คลื่นกำลังโต้คลื่นลูกใหญ่"},{"t":"A surfboard is lying on the sand.","r":"กระดานอยู่ใต้เท้านักโต้คลื่น ไม่ได้วางบนทราย"},{"t":"Some people are swimming near the shore.","r":"ไม่เห็นชายฝั่งและคนว่ายน้ำ"},{"t":"A boat is sailing on the sea.","r":"ไม่มีเรือ"}],"kw":["surfer","riding","wave"],"tip":"ride ใช้ได้กับคลื่น จักรยาน ม้า และรถ จำวลี riding a wave ไว้","wh":[960,524],"cues":[[1.99,3.7],[4.7,6.72],[7.72,9.69],[10.69,12.44]],"dur":13.44},{"n":55,"photo":"c288","trap":"state","ans":"C","opts":[{"t":"A woman is putting on a veil.","r":"สวมผ้าคลุมอยู่แล้ว"},{"t":"Some flowers are being arranged in a vase.","r":"ไม่มีแจกัน"},{"t":"A woman is holding a bouquet of flowers.","r":"ผู้หญิงถือช่อดอกไม้"},{"t":"A woman is planting some flowers.","r":"ไม่ได้ปลูกดอกไม้"}],"kw":["holding","bouquet","veil"],"tip":"bouquet (บูเก) = ช่อดอกไม้ เป็นคำที่ออกเสียงต่างจากตัวสะกด ควรฟังให้คุ้นหู","wh":[960,655],"cues":[[2.01,4.23],[5.23,8.34],[9.34,12.26],[13.26,15.91]],"dur":16.91},{"n":56,"photo":"c298","trap":"state","ans":"D","opts":[{"t":"A woman is cutting down a tree.","r":"ไม่ได้ตัดต้นไม้"},{"t":"A woman is taking off her hat.","r":"มือแตะผม ไม่ได้ถอดหมวก"},{"t":"A woman is picking up some leaves.","r":"ไม่ได้เก็บใบไม้"},{"t":"A woman is wearing a hat.","r":"ผู้หญิงสวมหมวก"}],"kw":["wearing","hat","taking off"],"tip":"wearing คือคำตอบที่ปลอดภัยกับภาพคนแต่งตัว เพราะบอกสภาพ ส่วน taking off บอกการกระทำ ต้องเห็นกำลังถอดจริง","wh":[960,640],"cues":[[2.07,3.99],[4.99,7.16],[8.16,10.26],[11.26,13.15]],"dur":14.15},{"n":57,"photo":"c333","trap":"verb","ans":"B","opts":[{"t":"A child is sleeping on the grass.","r":"เด็กตื่นอยู่ กำลังเล่น"},{"t":"A child is wearing a knitted hat.","r":"เด็กสวมหมวกไหมพรม"},{"t":"A child is climbing a tree.","r":"ไม่ได้ปีนต้นไม้"},{"t":"Some leaves are being raked.","r":"ไม่มีคนกวาดใบไม้"}],"kw":["wearing","knitted hat","child"],"tip":"ถ้าคนในภาพทำท่าที่บรรยายยาก ข้อสอบมักให้คำตอบเป็นสิ่งที่สวมอยู่ เช่น is wearing a hat","wh":[596,720],"cues":[[2.09,4.39],[5.39,7.91],[8.91,11.23],[12.23,14.26]],"dur":15.26},{"n":58,"photo":"c400","trap":"state","ans":"D","opts":[{"t":"A man is taking off his hat.","r":"ยังสวมหมวกอยู่"},{"t":"A man is painting a building.","r":"ไม่ได้ทาสีอาคาร"},{"t":"A man is closing the shutters.","r":"บานเกล็ดอยู่ด้านหลัง เขาไม่ได้ปิด"},{"t":"A man is wearing a hat.","r":"ผู้ชายสวมหมวก"}],"kw":["wearing","hat","shutters"],"tip":"shutters = บานเกล็ดหน้าต่าง เป็นคำที่อยู่ในภาพอาคาร ตัวลวงมักเอามาใส่กริยา closing","wh":[960,641],"cues":[[1.92,3.83],[4.83,6.69],[7.69,9.6],[10.6,12.18]],"dur":13.18},{"n":59,"photo":"c004","trap":"being","ans":"D","opts":[{"t":"Some bricks are being stacked.","r":"ไม่มีใครกองอิฐ"},{"t":"Some trash cans are being emptied.","r":"ถังขยะตั้งอยู่เฉย ๆ"},{"t":"Some plants are being watered.","r":"ไม่มีคนรดน้ำ"},{"t":"An alley runs between two brick buildings.","r":"มีตรอกแคบอยู่ระหว่างอาคารอิฐ"}],"kw":["alley","between","brick buildings"],"tip":"ภาพไม่มีคนเด่นชัด ให้ตัดทุกตัวเลือกที่เป็น is / are being + V3 ก่อน แล้วฟังประโยคบอกตำแหน่ง","wh":[960,720],"cues":[[2.01,4.62],[5.62,8.56],[9.56,12.28],[13.28,16.79]],"dur":17.79},{"n":60,"photo":"c012","trap":"place","ans":"B","opts":[{"t":"Some chairs have been set around a table.","r":"ไม่มีเก้าอี้"},{"t":"A small plant has been placed on a table.","r":"มีต้นไม้เล็กวางอยู่บนโต๊ะ"},{"t":"A plant is hanging on the wall.","r":"ต้นไม้อยู่บนโต๊ะ ไม่ได้แขวนผนัง"},{"t":"A table is being painted.","r":"ไม่มีคนทาสีโต๊ะ"}],"kw":["has been placed","on a table","plant"],"tip":"ของชิ้นเดียวบนโต๊ะ ให้ฟังบุพบท on / under / next to และรูป has been placed","wh":[960,552],"cues":[[1.88,4.76],[5.76,8.93],[9.93,12.44],[13.44,16.0]],"dur":17.0},{"n":61,"photo":"c013","trap":"being","ans":"B","opts":[{"t":"Some trees are being planted.","r":"ไม่มีการปลูกต้นไม้"},{"t":"Some logs have been piled up.","r":"ท่อนไม้ถูกกองซ้อนกันไว้"},{"t":"Some boxes are stacked on a truck.","r":"ไม่มีกล่องและรถบรรทุก"},{"t":"Some wood is being cut.","r":"ไม่มีคนกำลังตัดไม้"}],"kw":["logs","piled up","being cut"],"tip":"piled up / stacked = กองซ้อนกัน เป็นคำที่ถูกบ่อยกับภาพกองของ ตัวลวงจะเปลี่ยนเป็นการกระทำแบบ is being cut","wh":[960,640],"cues":[[1.99,3.6],[4.6,6.3],[7.3,9.37],[10.37,11.82]],"dur":12.82},{"n":62,"photo":"c016","trap":"being","ans":"C","opts":[{"t":"Some people are walking across the bridge.","r":"ไม่เห็นคนเดินบนสะพาน"},{"t":"A flag is being raised.","r":"ธงอยู่บนยอดแล้ว ไม่มีใครกำลังชัก"},{"t":"A bridge is supported by many cables.","r":"สะพานมีสายเคเบิลจำนวนมากยึดไว้"},{"t":"A bridge is being built.","r":"สะพานสร้างเสร็จแล้ว"}],"kw":["supported","cables","flag"],"tip":"is supported by = ถูกค้ำไว้ด้วย เป็น passive แบบสภาพ ไม่ใช่การกระทำ จึงถูกได้แม้ไม่มีคน","wh":[960,640],"cues":[[2.05,4.59],[5.59,7.72],[8.72,11.62],[12.62,14.69]],"dur":15.69},{"n":63,"photo":"c024","trap":"being","ans":"B","opts":[{"t":"Some people are fishing from the dock.","r":"ไม่มีคน"},{"t":"A dock extends into a lake.","r":"ท่าเรือยื่นออกไปในทะเลสาบ"},{"t":"Some boats are tied to the dock.","r":"ไม่มีเรือ"},{"t":"A dock is being repaired.","r":"ไม่มีใครกำลังซ่อม"}],"kw":["dock","extends into","lake"],"tip":"extend into / lead to / run along เป็นกริยาที่ใช้บรรยายตำแหน่งของสิ่งก่อสร้าง ไม่ใช่การกระทำของคน","wh":[960,636],"cues":[[2.03,4.16],[5.16,7.36],[8.36,10.47],[11.47,13.46]],"dur":14.46},{"n":64,"photo":"c026","trap":"being","ans":"B","opts":[{"t":"Some swimmers are diving into the water.","r":"ไม่มีคนว่ายน้ำ"},{"t":"A building has been built over the water.","r":"อาคารสร้างยื่นอยู่เหนือน้ำ"},{"t":"Some cars are crossing a bridge.","r":"ไม่มีรถ"},{"t":"A house is being painted.","r":"ไม่มีใครทาสีบ้าน"}],"kw":["building","over the water","being painted"],"tip":"has been built = สร้างเสร็จแล้ว ส่วน is being built = กำลังสร้าง สังเกตเสียง has been กับ is being ให้ออก","wh":[960,540],"cues":[[2.07,4.28],[5.28,7.69],[8.69,10.67],[11.67,13.35]],"dur":14.35},{"n":65,"photo":"c028","trap":"absent","ans":"D","opts":[{"t":"Some workers are repairing the tracks.","r":"ไม่มีคนงาน"},{"t":"Passengers are boarding a train.","r":"ไม่มีผู้โดยสาร"},{"t":"A bus is parked at a station.","r":"ไม่มีรถบัส"},{"t":"Many train cars are on the tracks.","r":"มีตู้รถไฟจำนวนมากอยู่บนราง"}],"kw":["train cars","tracks","boarding"],"tip":"train car = ตู้รถไฟ ส่วน board = ขึ้นรถหรือเครื่องบิน ถ้าไม่มีคนในภาพ ตัวเลือกที่มีคนทำกิจกรรมผิดทันที","wh":[960,638],"cues":[[2.07,3.96],[4.96,6.75],[7.75,9.6],[10.6,12.66]],"dur":13.66},{"n":66,"photo":"c042","trap":"place","ans":"B","opts":[{"t":"Some trees are being trimmed.","r":"ไม่มีคนตัดแต่งต้นไม้"},{"t":"Cars are parked along both sides of the street.","r":"รถจอดเรียงสองข้างถนน"},{"t":"A truck is being unloaded.","r":"รถบรรทุกจอดอยู่ ไม่มีคนขนของลง"},{"t":"A bridge is being painted.","r":"ไม่มีใครทาสีสะพาน"}],"kw":["parked","along both sides","street"],"tip":"along both sides of = เรียงทั้งสองข้าง ฟังวลีบอกตำแหน่งให้ครบ บางตัวลวงจะพูดแค่ one side","wh":[960,640],"cues":[[2.09,4.25],[5.25,8.66],[9.66,11.82],[12.82,14.99]],"dur":15.99},{"n":67,"photo":"c043","trap":"being","ans":"A","opts":[{"t":"A jacket is hanging on a wall.","r":"มีเสื้อแจ็กเก็ตแขวนอยู่บนผนัง"},{"t":"Some bags are being packed.","r":"ไม่มีคนจัดกระเป๋า"},{"t":"A man is trying on a jacket.","r":"ไม่มีคนในภาพ"},{"t":"Some pictures are being hung on the wall.","r":"ภาพแขวนอยู่แล้ว ไม่มีใครกำลังแขวน"}],"kw":["jacket","hanging","being hung"],"tip":"is hanging (แขวนอยู่) ถูก ส่วน are being hung (กำลังถูกแขวน) ผิด เพราะต้องมีคนกำลังแขวน คู่นี้ออกบ่อยมาก","wh":[960,641],"cues":[[2.11,4.03],[5.03,6.92],[7.92,10.09],[11.09,13.54]],"dur":14.54},{"n":68,"photo":"c046","trap":"being","ans":"D","opts":[{"t":"A kettle has been left on a stove.","r":"กาน้ำอยู่ในมือ ไม่ได้วางบนเตา"},{"t":"Some cups are being washed.","r":"ไม่มีใครล้างแก้ว"},{"t":"Coffee is being served to some customers.","r":"ไม่เห็นการเสิร์ฟให้ลูกค้า"},{"t":"Water is being poured from a kettle.","r":"มีคนกำลังรินน้ำจากกาต้มน้ำ"}],"kw":["poured","kettle","being"],"tip":"is being + V3 ถูกได้เมื่อเห็นคนกำลังทำ ภาพนี้มีมือกำลังรินน้ำ จึงใช้ is being poured ได้","wh":[960,640],"cues":[[2.03,4.63],[5.63,7.61],[8.61,11.43],[12.43,14.92]],"dur":15.92},{"n":69,"photo":"c077","trap":"being","ans":"A","opts":[{"t":"A notebook is lying open on a table.","r":"สมุดกางวางอยู่บนโต๊ะ"},{"t":"A camera is being repaired.","r":"ไม่มีคนซ่อมกล้อง"},{"t":"Someone is writing in a notebook.","r":"มีดินสอ แต่ไม่มีคนเขียน"},{"t":"Some glasses are being cleaned.","r":"แว่นวางอยู่เฉย ๆ"}],"kw":["notebook","lying open","table"],"tip":"ภาพของวางบนโต๊ะ ตัวลวงชอบใช้ของที่เห็นในภาพทุกชิ้น (camera, glasses) ให้ตัดตัวเลือกที่มีการกระทำ","wh":[960,720],"cues":[[2.03,4.71],[5.71,7.5],[8.5,10.57],[11.57,13.49]],"dur":14.49},{"n":70,"photo":"c086","trap":"general","ans":"A","opts":[{"t":"Some flowers have been placed in a container.","r":"ดอกไม้ถูกปักไว้ในภาชนะ"},{"t":"Some flowers are being watered.","r":"ไม่มีใครรดน้ำ"},{"t":"A tag is being attached to a pitcher.","r":"ป้ายแขวนอยู่แล้ว"},{"t":"Some flowers are growing in a garden.","r":"ดอกไม้อยู่ในเหยือก ไม่ได้อยู่ในสวน"}],"kw":["flowers","placed","container"],"tip":"container เป็นคำกว้างที่ใช้แทนเหยือก แจกัน กล่อง ถ้าไม่แน่ใจชื่อของ ให้มองหาคำกว้างแบบนี้ในตัวเลือก","wh":[960,720],"cues":[[1.92,5.41],[6.41,9.25],[10.25,13.26],[14.26,17.42]],"dur":18.42},{"n":71,"photo":"c091","trap":"being","ans":"B","opts":[{"t":"An escalator is being repaired.","r":"ไม่มีช่างกำลังซ่อม"},{"t":"Two escalators run side by side.","r":"บันไดเลื่อน 2 ตัวอยู่ติดกัน"},{"t":"Some windows are being cleaned.","r":"ไม่มีใครเช็ดกระจก"},{"t":"Some people are waiting in line at a gate.","r":"ไม่มีคนเข้าแถว"}],"kw":["escalators","side by side","being repaired"],"tip":"side by side = อยู่เคียงข้างกัน เป็นวลีบอกตำแหน่งที่ใช้กับของสองชิ้นบ่อย","wh":[960,640],"cues":[[2.12,4.97],[5.97,9.06],[10.06,12.57],[13.57,16.43]],"dur":17.43},{"n":72,"photo":"c104","trap":"state","ans":"A","opts":[{"t":"A car is parked on a street.","r":"รถจอดอยู่บนถนน"},{"t":"A car is being washed.","r":"ไม่มีใครล้างรถ"},{"t":"Some people are getting out of a car.","r":"ไม่มีคน"},{"t":"A car's hood is open.","r":"ฝากระโปรงหน้าปิดอยู่"}],"kw":["parked","street","hood"],"tip":"open / closed เป็นสภาพที่ข้อสอบชอบสลับ ดูประตู หน้าต่าง ฝากระโปรงรถ ลิ้นชัก ให้ดีก่อนเสียงเริ่ม","wh":[960,639],"cues":[[2.14,3.88],[4.88,6.4],[7.4,9.47],[10.47,11.95]],"dur":12.95},{"n":73,"photo":"c108","trap":"being","ans":"A","opts":[{"t":"An old truck has been left in a field.","r":"รถบรรทุกเก่าถูกทิ้งไว้กลางทุ่ง"},{"t":"A truck is being loaded with hay.","r":"มีฟางในทุ่ง แต่ไม่มีใครขนขึ้นรถ"},{"t":"A farmer is driving a truck.","r":"ไม่มีคนขับ"},{"t":"Some hay is being cut.","r":"ไม่มีใครกำลังตัดฟาง"}],"kw":["truck","has been left","field"],"tip":"has been left = ถูกทิ้งไว้ เป็นรูปสภาพที่ใช้กับของที่อยู่เฉย ๆ ส่วน is being loaded ต้องเห็นคนกำลังขน","wh":[960,643],"cues":[[2.16,4.82],[5.82,8.21],[9.21,11.62],[12.62,14.67]],"dur":15.67},{"n":74,"photo":"c121","trap":"being","ans":"C","opts":[{"t":"A ship is being loaded with containers.","r":"ไม่มีการขนตู้สินค้า"},{"t":"An archway is being painted.","r":"ไม่มีใครทาสีซุ้ม"},{"t":"A ship can be seen through an archway.","r":"มองเห็นเรือผ่านซุ้มโค้ง"},{"t":"Some passengers are boarding a ship.","r":"ไม่มีผู้โดยสาร"}],"kw":["ship","seen through","archway"],"tip":"can be seen = มองเห็นได้ เป็นรูปที่ใช้บรรยายของที่อยู่ไกลในภาพ ฟังคำบุพบท through ให้ทัน","wh":[960,640],"cues":[[2.2,4.72],[5.72,7.89],[8.89,11.2],[12.2,14.59]],"dur":15.59},{"n":75,"photo":"c126","trap":"place","ans":"B","opts":[{"t":"A canoe is floating on the water.","r":"เรืออยู่บนแพ ไม่ได้ลอยน้ำ"},{"t":"A canoe has been placed on a dock.","r":"เรือแคนูวางอยู่บนแพไม้"},{"t":"A canoe is being paddled across a lake.","r":"ไม่มีคนพาย"},{"t":"A dock is being built.","r":"แพสร้างเสร็จแล้ว"}],"kw":["canoe","placed on","dock"],"tip":"ระวัง on the dock กับ on the water ต่างกันแค่คำสุดท้าย ฟังให้จบประโยคก่อนตัดสิน","wh":[960,636],"cues":[[2.18,4.05],[5.05,7.18],[8.18,10.59],[11.59,13.06]],"dur":14.06},{"n":76,"photo":"c134","trap":"verb","ans":"B","opts":[{"t":"A car is being painted.","r":"ไม่มีใครพ่นสีรถ"},{"t":"A car is parked in front of a building.","r":"รถจอดอยู่หน้าอาคาร"},{"t":"A man is getting into a car.","r":"ไม่ได้ขึ้นรถ"},{"t":"A man is washing a car.","r":"ผู้ชายนั่งอยู่ด้านหลัง ไม่ได้ล้างรถ"}],"kw":["parked","in front of","building"],"tip":"ภาพนี้มีคนตัวเล็กด้านหลัง ตัวลวงจะดึงคนนั้นมาทำกิจกรรมกับรถ ให้ดูว่าเขาอยู่ใกล้รถจริงไหม","wh":[960,452],"cues":[[2.2,3.64],[4.64,6.92],[7.92,9.67],[10.67,12.33]],"dur":13.33},{"n":77,"photo":"c139","trap":"general","ans":"C","opts":[{"t":"Some strawberries are being picked.","r":"ไม่มีใครเก็บ"},{"t":"Some strawberries are growing in a field.","r":"อยู่ในกล่อง ไม่ได้อยู่ในไร่"},{"t":"Some fruit has been put in containers.","r":"ผลไม้ถูกใส่ไว้ในกล่อง"},{"t":"Some fruit is being washed.","r":"ไม่มีใครล้าง"}],"kw":["fruit","put in","containers"],"tip":"fruit เป็นคำกว้างแทน strawberries ตัวเลือกที่ถูกมักใช้คำกว้าง ส่วนตัวลวงใช้ชื่อเฉพาะแต่กริยาผิด","wh":[960,640],"cues":[[2.24,4.5],[5.5,8.23],[9.23,11.99],[12.99,15.1]],"dur":16.1},{"n":78,"photo":"c140","trap":"state","ans":"D","opts":[{"t":"Some berries are being poured into a bowl.","r":"ไม่มีชาม"},{"t":"Some berries are being weighed on a scale.","r":"ไม่มีตาชั่ง"},{"t":"Some cartons are empty.","r":"กล่องมีผลไม้เต็ม"},{"t":"Some berries are displayed in cartons.","r":"บลูเบอร์รีวางโชว์อยู่ในกล่อง"}],"kw":["berries","displayed","cartons"],"tip":"displayed = วางโชว์ เป็นคำที่ใช้กับสินค้าในร้านหรือตลาดบ่อยมาก empty / full เป็นคู่ตรงข้ามที่ต้องเช็ก","wh":[960,640],"cues":[[2.18,4.61],[5.61,8.01],[9.01,10.82],[11.82,14.35]],"dur":15.35},{"n":79,"photo":"c159","trap":"sound","ans":"A","opts":[{"t":"Some old photographs are arranged in rows.","r":"รูปถ่ายเก่าเรียงเป็นแถว"},{"t":"Some pictures are hanging on a wall.","r":"รูปอยู่ในกล่อง ไม่ได้แขวนผนัง"},{"t":"Some photographs are being framed.","r":"ไม่มีใครใส่กรอบ"},{"t":"Some photographs are being taken.","r":"photograph ตรงกับภาพ แต่ไม่มีใครกำลังถ่ายรูป"}],"kw":["photographs","arranged","rows"],"tip":"คำนามที่ตรงกับภาพไม่ได้แปลว่าถูก ฟังกริยาต่อท้ายเสมอ arranged in rows = จัดเรียงเป็นแถว","wh":[960,638],"cues":[[2.18,5.12],[6.12,8.57],[9.57,11.94],[12.94,15.3]],"dur":16.3},{"n":80,"photo":"c167","trap":"absent","ans":"C","opts":[{"t":"A train is crossing a bridge.","r":"ไม่มีรถไฟ"},{"t":"Some trees are being cut down.","r":"ไม่มีคนตัดต้นไม้"},{"t":"A bridge crosses over a valley.","r":"สะพานข้ามหุบเขา"},{"t":"A road runs along a beach.","r":"ไม่มีชายหาด"}],"kw":["bridge","crosses over","valley"],"tip":"cross ใช้ได้ทั้งคนข้ามและสะพานข้าม ภาพมุมสูงแบบนี้คำตอบมักเป็นสิ่งก่อสร้าง + กริยาบอกตำแหน่ง","wh":[960,719],"cues":[[1.8,3.54],[4.54,6.52],[7.52,9.56],[10.56,12.44]],"dur":13.44},{"n":81,"photo":"c195","trap":"being","ans":"C","opts":[{"t":"Some pictures are hanging on a wall.","r":"กรอบว่าง ไม่มีรูปและไม่ได้แขวน"},{"t":"Some frames are being packed into boxes.","r":"ไม่มีกล่อง"},{"t":"Some frames have been leaned against each other.","r":"กรอบรูปพิงกันไว้หลายอัน"},{"t":"Some frames are being painted.","r":"กรอบทาสีแล้ว ไม่มีใครกำลังทา"}],"kw":["frames","leaned against","each other"],"tip":"ของมีสีสด ๆ ทำให้นึกถึงคำว่า painted แต่ is being painted แปลว่ากำลังทาสีอยู่ ต้องเห็นคนทำ","wh":[960,640],"cues":[[1.94,4.81],[5.81,9.1],[10.1,13.63],[14.63,17.47]],"dur":18.47},{"n":82,"photo":"c205","trap":"being","ans":"A","opts":[{"t":"A large building overlooks a sports court.","r":"อาคารสูงตั้งอยู่หลังสนามกีฬา"},{"t":"A building is being torn down.","r":"อาคารยังอยู่ ไม่มีการรื้อถอน"},{"t":"A court is being painted.","r":"ไม่มีใครทาสีสนาม"},{"t":"Some trees are being planted.","r":"ต้นปาล์มปลูกไว้แล้ว"}],"kw":["building","overlooks","court"],"tip":"overlook = มองลงมาเห็น ใช้บอกว่าอาคารหรือห้องตั้งอยู่เหนือหรือหันหน้าไปทางอะไร","wh":[480,720],"cues":[[1.99,5.09],[6.09,8.57],[9.57,11.95],[12.95,15.41]],"dur":16.41},{"n":83,"photo":"c213","trap":"state","ans":"C","opts":[{"t":"Some luggage is being loaded onto a roof rack.","r":"แร็กหลังคาว่าง ไม่มีใครขนของ"},{"t":"A man is getting out of a car.","r":"ไม่มีคน"},{"t":"A car is parked on a tree-lined road.","r":"รถจอดอยู่บนถนนที่มีต้นไม้เรียงสองข้าง"},{"t":"A car is being towed.","r":"ไม่มีรถลาก"}],"kw":["parked","tree-lined","road"],"tip":"tree-lined = มีต้นไม้เรียงรายสองข้าง เป็นคำประสมที่ใช้บรรยายถนนในภาพบ่อย","wh":[960,640],"cues":[[2.03,4.79],[5.79,7.7],[8.7,11.0],[12.0,13.49]],"dur":14.49},{"n":84,"photo":"c222","trap":"absent","ans":"C","opts":[{"t":"Some people are swimming in a river.","r":"ไม่มีคนว่ายน้ำ"},{"t":"Some boats are passing under a bridge.","r":"ไม่มีเรือ"},{"t":"A bridge spans a river.","r":"สะพานทอดข้ามแม่น้ำ"},{"t":"A bridge is being repaired.","r":"ไม่มีการซ่อม"}],"kw":["bridge","spans","river"],"tip":"span = ทอดข้าม เป็นกริยาเฉพาะของสะพาน ถ้าได้ยินคำนี้กับภาพสะพาน มักเป็นคำตอบที่ถูก","wh":[960,569],"cues":[[1.97,4.29],[5.29,7.72],[8.72,10.83],[11.83,14.05]],"dur":15.05},{"n":85,"photo":"c226","trap":"verb","ans":"D","opts":[{"t":"Some wood is being chopped.","r":"ไม่มีใครผ่าฟืน"},{"t":"A fire is being put out.","r":"ไฟยังลุกอยู่ ไม่มีคนดับ"},{"t":"Some food is being cooked over a fire.","r":"ไม่มีอาหาร"},{"t":"Some wood is burning in a fire pit.","r":"ฟืนกำลังลุกไหม้ในหลุมไฟ"}],"kw":["wood","burning","fire pit"],"tip":"put out = ดับไฟ กับ burning = กำลังลุกไหม้ เป็นคู่ตรงข้าม ให้ดูว่าไฟในภาพยังลุกอยู่ไหม","wh":[960,640],"cues":[[2.03,3.99],[4.99,7.15],[8.15,10.77],[11.77,14.43]],"dur":15.43},{"n":86,"photo":"c227","trap":"state","ans":"D","opts":[{"t":"Some spectators are sitting in the stands.","r":"ไม่มีผู้ชม"},{"t":"Some seats are being installed.","r":"ไม่มีช่างติดตั้ง"},{"t":"Some seats are stacked on top of each other.","r":"เก้าอี้ติดตั้งเป็นแถว ไม่ได้ซ้อนกัน"},{"t":"Rows of seats are unoccupied.","r":"เก้าอี้หลายแถวว่างอยู่"}],"kw":["rows of seats","unoccupied","spectators"],"tip":"unoccupied = ว่าง ไม่มีคนนั่ง (occupied = มีคนนั่ง) เป็นคำที่ใช้กับภาพเก้าอี้หรือโต๊ะว่างบ่อยมาก","wh":[960,640],"cues":[[2.07,4.27],[5.27,7.06],[8.06,10.6],[11.6,13.55]],"dur":14.55},{"n":87,"photo":"c245","trap":"verb","ans":"C","opts":[{"t":"A man is repairing a car.","r":"นั่งอยู่เฉย ๆ ไม่ได้ซ่อม"},{"t":"Some cars are lined up in a parking lot.","r":"มีรถคันเดียว"},{"t":"A man is sitting in a vehicle.","r":"ผู้ชายนั่งอยู่ในรถ"},{"t":"A man is closing the trunk of a car.","r":"อยู่ในที่นั่งคนขับ ไม่ได้ปิดท้ายรถ"}],"kw":["sitting","vehicle","repairing"],"tip":"vehicle เป็นคำกว้างแทน car, truck, bus ถ้าได้ยินคำนี้ให้คิดถึงรถทุกชนิดในภาพ","wh":[960,640],"cues":[[2.07,3.63],[4.63,7.25],[8.25,9.94],[10.94,13.21]],"dur":14.21},{"n":88,"photo":"c247","trap":"verb","ans":"C","opts":[{"t":"A man is mopping the floor.","r":"ไม่มีใครถูพื้น"},{"t":"Some paintings are hanging from the ceiling.","r":"ไม่มีภาพแขวนจากเพดาน"},{"t":"Display cases have been arranged along a hallway.","r":"ตู้โชว์จัดเรียงไปตามโถงทางเดิน"},{"t":"Some display cases are being moved.","r":"ไม่มีคนย้ายตู้"}],"kw":["display cases","arranged","hallway"],"tip":"display case = ตู้โชว์ hallway / corridor = โถงทางเดิน ภาพพิพิธภัณฑ์หรือร้านค้ามักใช้คำพวกนี้","wh":[960,640],"cues":[[1.94,4.18],[5.18,7.96],[8.96,12.41],[13.41,16.14]],"dur":17.14},{"n":89,"photo":"c264","trap":"state","ans":"D","opts":[{"t":"Some maps are mounted on a wall.","r":"วางบนพื้นผิว ไม่ได้ติดผนัง"},{"t":"A map has been rolled up in a tube.","r":"ไม่มีแผนที่ม้วน"},{"t":"Some maps are being folded.","r":"ไม่มีใครกำลังพับ"},{"t":"Some maps are spread out on a surface.","r":"แผนที่หลายแผ่นวางกระจายอยู่"}],"kw":["maps","spread out","surface"],"tip":"spread out = กางออก วางกระจาย ตรงข้ามกับ folded (พับ) และ rolled up (ม้วน) ให้ดูสภาพของกระดาษในภาพ","wh":[960,640],"cues":[[1.99,3.88],[4.88,7.07],[8.07,10.12],[11.12,13.53]],"dur":14.53},{"n":90,"photo":"c265","trap":"being","ans":"B","opts":[{"t":"A letter is being written.","r":"มีลายมือ แต่ไม่มีใครกำลังเขียน"},{"t":"A pen has been placed on some paper.","r":"ปากกาวางอยู่บนกระดาษ"},{"t":"A notebook is closed.","r":"สมุดเปิดอยู่"},{"t":"Some pens are being put in a drawer.","r":"ไม่มีลิ้นชัก"}],"kw":["pen","placed on","paper"],"tip":"ภาพมีลายมือทำให้นึกถึง writing แต่ is being written ต้องเห็นมือคนกำลังเขียน ภาพที่ไม่มีคนให้เลือก has been placed","wh":[960,640],"cues":[[1.88,3.78],[4.78,7.66],[8.66,10.51],[11.51,14.03]],"dur":15.03},{"n":91,"photo":"c267","trap":"absent","ans":"A","opts":[{"t":"Buildings line both sides of a canal.","r":"อาคารเรียงอยู่สองฝั่งคลอง"},{"t":"Some people are fishing from a bank.","r":"ไม่มีคนตกปลา"},{"t":"A boat is sailing under a bridge.","r":"ไม่มีเรือ"},{"t":"Some lights are being installed on a building.","r":"ไฟติดอยู่แล้วและเปิดอยู่ ไม่มีช่าง"}],"kw":["buildings","line","both sides","canal"],"tip":"line ใช้เป็นกริยาได้ = เรียงเป็นแนว (Trees line the street.) both sides = ทั้งสองฝั่ง","wh":[960,600],"cues":[[2.01,4.41],[5.41,7.68],[8.68,10.74],[11.74,14.49]],"dur":15.49},{"n":92,"photo":"c272","trap":"place","ans":"C","opts":[{"t":"A book is lying on a towel.","r":"ไม่มีผ้าเช็ดตัว"},{"t":"Someone is reading a book on the beach.","r":"ไม่มีคนอ่าน"},{"t":"A book has been left open on the sand.","r":"หนังสือเปิดทิ้งไว้บนทราย"},{"t":"A branch is floating in the water.","r":"กิ่งไม้อยู่บนทราย ไม่ได้อยู่ในน้ำ"}],"kw":["book","left open","sand"],"tip":"has been left open = ถูกเปิดทิ้งไว้ บอกทั้งสภาพ (open) และว่าไม่มีคนอยู่ ฟังคำบุพบท on the sand / in the water ให้ทัน","wh":[960,641],"cues":[[2.01,4.63],[5.63,8.76],[9.76,12.88],[13.88,16.99]],"dur":17.99},{"n":93,"photo":"c292","trap":"sound","ans":"A","opts":[{"t":"Some pancakes are stacked on a plate.","r":"แพนเค้กซ้อนกันอยู่บนจาน"},{"t":"Some pans are stacked on a shelf.","r":"pan เสียงคล้าย pancake แต่ไม่มีกระทะ"},{"t":"A plate is being washed.","r":"ไม่มีคนล้างจาน"},{"t":"Some food is being served to a customer.","r":"ไม่มีลูกค้าหรือพนักงาน"}],"kw":["pancakes","stacked","plate"],"tip":"ตัวลวงเสียงคล้ายมักใช้คำส่วนหนึ่งของคำในภาพ (pancake → pan) ฟังคำนามให้ครบทั้งคำ","wh":[480,720],"cues":[[1.99,4.5],[5.5,7.89],[8.89,11.14],[12.14,15.13]],"dur":16.13},{"n":94,"photo":"c296","trap":"number","ans":"A","opts":[{"t":"Many candles have been lit.","r":"เทียนหลายเล่มถูกจุดไว้"},{"t":"A single candle is burning on a table.","r":"มีเทียนมากมาย ไม่ใช่เล่มเดียว"},{"t":"Some candles are being blown out.","r":"ไม่มีใครเป่าเทียน"},{"t":"Some candles are being sold at a market.","r":"ไม่มีคนขาย"}],"kw":["many","candles","lit"],"tip":"lit = ถูกจุด (อดีตของ light) คำบอกจำนวนอย่าง many, a single, a few ต้องตรงกับภาพ","wh":[960,640],"cues":[[1.99,3.58],[4.58,6.98],[7.98,9.9],[10.9,13.45]],"dur":14.45},{"n":95,"photo":"c305","trap":"place","ans":"B","opts":[{"t":"Some pictures are hanging next to a clock.","r":"ผนังโล่ง ไม่มีรูปภาพ"},{"t":"A clock is mounted on a wall.","r":"นาฬิกาติดอยู่บนผนัง"},{"t":"A clock is being repaired.","r":"ไม่มีใครซ่อม"},{"t":"A clock has been placed on a shelf.","r":"ไม่มีชั้นวาง"}],"kw":["clock","mounted","wall"],"tip":"mounted on = ติดตั้งอยู่บน เป็นคำที่ใช้กับนาฬิกา ทีวี ชั้นวาง ภาพที่มีของชิ้นเดียว ให้ดูว่ามันอยู่บนอะไร","wh":[960,622],"cues":[[2.03,4.65],[5.65,7.87],[8.87,11.0],[12.0,14.62]],"dur":15.62},{"n":96,"photo":"c317","trap":"being","ans":"B","opts":[{"t":"Some tiles are being installed on a wall.","r":"กระเบื้องติดเสร็จแล้ว"},{"t":"A handrail runs down the middle of some stairs.","r":"ราวจับอยู่ตรงกลางบันได"},{"t":"Some stairs are being swept.","r":"ไม่มีใครกวาด"},{"t":"Some passengers are walking down the stairs.","r":"ไม่มีผู้โดยสาร"}],"kw":["handrail","middle","stairs"],"tip":"handrail / railing = ราวจับ in the middle of = ตรงกลาง ภาพสถานีที่ไม่มีคนให้ตัดตัวเลือกที่มีผู้โดยสารทิ้ง","wh":[480,720],"cues":[[2.03,4.35],[5.35,8.21],[9.21,11.2],[12.2,14.84]],"dur":15.84},{"n":97,"photo":"c320","trap":"being","ans":"C","opts":[{"t":"A walkway is crowded with pedestrians.","r":"ไม่มีคนเดิน"},{"t":"Some workers are painting a railing.","r":"ไม่มีคนงาน"},{"t":"Some steps lead up to a walkway.","r":"บันไดขึ้นไปสู่ทางเดิน"},{"t":"Some steps are being repaired.","r":"ไม่มีการซ่อม"}],"kw":["steps","lead up to","walkway"],"tip":"lead (up) to = นำไปสู่ ใช้กับบันได ทางเดิน ประตู เป็นกริยาบอกตำแหน่งที่ถูกบ่อยในภาพที่ไม่มีคน","wh":[960,640],"cues":[[2.07,4.38],[5.38,7.44],[8.44,10.43],[11.43,13.19]],"dur":14.19},{"n":98,"photo":"c323","trap":"state","ans":"A","opts":[{"t":"A street lamp is lit on a bridge.","r":"โคมไฟบนสะพานเปิดอยู่"},{"t":"Some statues are being cleaned.","r":"ไม่มีคนทำความสะอาด"},{"t":"Some cars are driving across a bridge.","r":"เป็นทางเดิน ไม่มีรถ"},{"t":"A lamp post is being installed.","r":"ติดตั้งเสร็จแล้ว"}],"kw":["street lamp","lit","bridge"],"tip":"lit / on = ไฟเปิด ส่วน off = ปิด ภาพกลางคืนมักถามสภาพไฟแบบนี้","wh":[960,640],"cues":[[1.97,3.92],[4.92,6.68],[7.68,10.13],[11.13,13.13]],"dur":14.13},{"n":99,"photo":"c342","trap":"place","ans":"C","opts":[{"t":"A beach is crowded with swimmers.","r":"ชายหาดเกือบว่าง"},{"t":"Some palm trees are being planted.","r":"ต้นปาล์มขึ้นอยู่แล้ว"},{"t":"A road runs between some buildings and a beach.","r":"ถนนอยู่ระหว่างอาคารกับชายหาด"},{"t":"Some boats are docked along a shore.","r":"ไม่มีเรือ"}],"kw":["road","between","buildings","beach"],"tip":"between A and B = ระหว่าง A กับ B ภาพมุมสูงมักทดสอบตำแหน่ง ให้ไล่ดูว่าอะไรอยู่ติดอะไร","wh":[960,540],"cues":[[1.97,4.44],[5.44,8.13],[9.13,12.5],[13.5,16.17]],"dur":17.17},{"n":100,"photo":"c348","trap":"absent","ans":"D","opts":[{"t":"Some leaves are being swept into a pile.","r":"ไม่มีใครกวาด"},{"t":"Some leaves are falling from a tree.","r":"ไม่มีต้นไม้"},{"t":"Some clothes are hanging on a line.","r":"มีไม้หนีบผ้า แต่สิ่งที่แขวนคือใบไม้ ไม่ใช่เสื้อผ้า"},{"t":"Some leaves are hanging from a string.","r":"ใบไม้แขวนอยู่บนเชือก"}],"kw":["leaves","hanging","string"],"tip":"ตัวลวงใช้กริยาถูก (hanging) แต่เปลี่ยนคำนามเป็นของที่นึกถึงได้จากภาพ (clothes) ฟังทั้งคำนามและกริยา","wh":[960,640],"cues":[[2.01,4.36],[5.36,7.57],[8.57,10.74],[11.74,13.96]],"dur":14.96}]/*END*/;
+const TR={
+ being:{name:'is being + V3 แต่ไม่มีคนทำ',desc:'"is/are being + V3" แปลว่ามีคนกำลังทำสิ่งนั้นกับของอยู่ตอนนี้ ถ้าในภาพไม่มีคน ตัวเลือกแบบนี้ผิดเกือบทุกครั้ง ภาพที่ไม่มีคน คำตอบมักเป็น has been + V3 หรือ is + V3 ที่บอกสภาพ'},
+ verb:{name:'คำนามถูก แต่กริยาผิด',desc:'ตัวลวงพูดถึงคนหรือของที่อยู่ในภาพจริง แต่บอกการกระทำที่ไม่ได้เกิดขึ้น ได้ยินคำนามตรงกับภาพแล้วอย่าเพิ่งเลือก ต้องฟังกริยาให้จบก่อน'},
+ sound:{name:'เสียงคล้าย / คำซ้ำคนละความหมาย',desc:'ใช้คำที่ออกเสียงคล้ายของในภาพ (watch–wash, pancake–pan) หรือคำเดียวกันแต่ความหมายต่าง (arms raised–raising a flag) เพื่อให้หูจับคำได้แล้วรีบเลือก'},
+ place:{name:'ตำแหน่งผิด',desc:'ของในประโยคมีอยู่ในภาพจริง แต่บอกที่อยู่ผิด เช่น on a shelf ทั้งที่ติดผนัง คำบุพบทบอกตำแหน่งมักอยู่ท้ายประโยค จึงต้องฟังให้จบ'},
+ state:{name:'สภาพผิด',desc:'บอกสภาพไม่ตรงกับภาพ เช่น open–closed, empty–full, wearing (สวมอยู่) กับ putting on (กำลังสวม) ต้องดูรายละเอียดเล็ก ๆ ให้ทันก่อนเสียงเริ่ม'},
+ number:{name:'จำนวนผิด',desc:'ภาพมีคนหรือของจำนวนหนึ่ง แต่ตัวลวงใช้ both, all, everyone, a single, a crowd ที่ไม่ตรงกับที่เห็น ควรนับคนในภาพไว้ก่อนเสมอ'},
+ general:{name:'คำตอบใช้คำกว้าง',desc:'ประโยคที่ถูกมักไม่เรียกชื่อเฉพาะของสิ่งของ แต่ใช้คำรวม เช่น fruit แทน strawberries, vehicle แทน car, container แทน box ต้องรู้ว่าคำกว้างคลุมอะไรบ้าง'},
+ absent:{name:'พูดถึงของที่ไม่มีในภาพ',desc:'ตัวลวงพูดถึงคนหรือของที่เข้ากับฉาก แต่ไม่มีอยู่ในภาพจริง เช่น ภาพคลองแต่พูดถึงเรือ ถ้ามองไม่เห็นในภาพ ตัดทิ้งได้ทันที'}
+};
+const EG={being:['c108','A truck is being'],verb:['c015','A woman is taking off'],state:['c006','The person is putting on'],sound:['c027','A person is washing'],place:['c126','A canoe is floating'],absent:['c348','Some clothes'],number:['c296','A single candle'],general:['c139','Some strawberries are growing']};
+const TORDER=['being','verb','state','sound','place','absent','number','general'];
+const Q=DATA, N=Q.length, NSET=Math.ceil(N/10);
+const LS='toeic.p1.v1', LP='toeic.p1.pref';
+let S={a:{},ex:{}}, P={rate:1,script:false};
+try{const s=JSON.parse(localStorage.getItem(LS)||'null');if(s&&s.a)S=Object.assign({a:{},ex:{}},s)}catch(e){}
+try{Object.assign(P,JSON.parse(localStorage.getItem(LP)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
+const savePref=()=>{try{localStorage.setItem(LP,JSON.stringify(P))}catch(e){}};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad3=n=>String(n).padStart(3,'0');
+const app=$('#app');
+const PLAY='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>';
+
+/* ---------- audio ---------- */
+const au=new Audio();au.preload='auto';
+let A={stop:null,cb:null,raf:0,cues:null,src:''};
+function stopAudio(){au.pause();cancelAnimationFrame(A.raf);if(A.pending){au.removeEventListener('loadedmetadata',A.pending);A.pending=null}A.stop=null;A.cb=null;mark(-1,false)}
+function mark(i,all){$$('[data-s]').forEach(b=>b.classList.toggle('playing',+b.dataset.s===i));const p=$('#pall');if(p)p.classList.toggle('playing',!!all)}
+function tick(){
+  if(au.paused)return;
+  const t=au.currentTime;
+  if(A.cues){let k=-1;A.cues.forEach((c,i)=>{if(t>=c[0]-.05&&t<c[1]+.3)k=i});mark(A.all?k:A.one,A.all)}
+  if(A.stop!=null&&t>=A.stop){const cb=A.cb;stopAudio();cb&&cb();return}
+  A.raf=requestAnimationFrame(tick);
+}
+au.addEventListener('ended',()=>{const cb=A.cb;stopAudio();cb&&cb()});
+au.addEventListener('play',()=>{cancelAnimationFrame(A.raf);A.raf=requestAnimationFrame(tick);const h=$('#ah');if(h)h.textContent=''});
+function play(src,from,to,rate,opt){
+  stopAudio();
+  opt=opt||{};
+  if(A.src!==src){A.src=src;au.src=src}
+  au.defaultPlaybackRate=rate;au.playbackRate=rate;
+  if('preservesPitch' in au)au.preservesPitch=true;
+  A.stop=to;A.cb=opt.cb||null;A.cues=opt.cues||null;A.all=!!opt.all;A.one=opt.one;
+  const go=()=>{try{au.currentTime=from}catch(e){}au.playbackRate=rate;const p=au.play();if(p&&p.catch)p.catch(()=>{opt.blocked&&opt.blocked()})};
+  if(au.readyState>=1)go();else{A.pending=()=>{A.pending=null;go()};au.addEventListener('loadedmetadata',A.pending,{once:true})}
+}
+
+/* ---------- routing ---------- */
+let timers=[], last='';
+const later=(f,ms)=>{const t=setTimeout(f,ms);timers.push(t);return t};
+const clearTimers=()=>{timers.forEach(clearTimeout);timers=[]};
+function go(h){if(location.hash!==h)history.pushState(null,'',h);route(true)}
+function route(force){
+  const h=location.hash||'#home';
+  if(!force&&h===last)return;
+  last=h;stopAudio();clearTimers();E=null;
+  const p=h.slice(1).split('/');
+  if(p[0]==='p')practice(p[1]||'all',+p[2]||0);
+  else if(p[0]==='x')examIntro(Math.min(NSET,Math.max(1,+p[1]||1)));
+  else if(p[0]==='how')method();
+  else home();
+  window.scrollTo(0,0);
+}
+addEventListener('popstate',()=>route());
+addEventListener('hashchange',()=>route());
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(a&&!e.defaultPrevented&&!e.metaKey&&!e.ctrlKey){e.preventDefault();go(a.getAttribute('href'))}
+});
+
+/* ---------- helpers ---------- */
+function bar(mid,right){
+  return `<header class="bar"><div class="in pad">
+    <a href="#home" class="ttl">TOEIC Part 1</a>${mid?`<span class="meta">${mid}</span>`:''}
+    <span class="sp"></span>${right||''}
+  </div></header>`;
+}
+function queue(f){
+  if(f==='all')return Q.map(q=>q.n);
+  if(TR[f])return Q.filter(q=>q.trap===f).map(q=>q.n);
+  if(f==='wrong'){if(!queue.snap)queue.snap=Q.filter(q=>S.a[q.n]&&!S.a[q.n].ok).map(q=>q.n);return queue.snap.length?queue.snap:[1]}
+  const m=/^s(\d+)$/.exec(f);
+  if(m){const k=+m[1];return Q.filter(q=>q.n>(k-1)*10&&q.n<=k*10).map(q=>q.n)}
+  return Q.map(q=>q.n);
+}
+function fname(f){
+  if(f==='all')return 'ทั้งหมด';
+  if(TR[f])return TR[f].name;
+  if(f==='wrong')return 'ข้อที่เคยผิด';
+  const m=/^s(\d+)$/.exec(f);return m?`ทวนชุด ${m[1]}`:'';
+}
+function hl(text,kw){
+  let h=esc(text);
+  const ks=[...kw].sort((a,b)=>b.length-a.length).filter(k=>k.length>1);
+  if(!ks.length)return h;
+  const re=new RegExp('\\b('+ks.map(k=>esc(k).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')\\b','gi');
+  return h.replace(re,'<mark>$1</mark>');
+}
+function img(q,alt){return `<img src="img/${q.photo}.jpg" width="${q.wh[0]}" height="${q.wh[1]}" alt="${esc(alt)}" decoding="async">`}
+function stats(){
+  const done=Object.keys(S.a).length, ok=Object.values(S.a).filter(r=>r.ok).length;
+  const by={};TORDER.forEach(t=>by[t]={n:0,done:0,ok:0});
+  Q.forEach(q=>{const b=by[q.trap];b.n++;const r=S.a[q.n];if(r){b.done++;if(r.ok)b.ok++}});
+  return {done,ok,by};
+}
+
+/* ---------- home ---------- */
+function home(){
+  const st=stats();
+  const next=(Q.find(q=>!S.a[q.n])||Q[0]).n;
+  const wrong=Q.filter(q=>S.a[q.n]&&!S.a[q.n].ok).length;
+  queue.snap=null;
+  app.innerHTML=bar('',`<a href="../">ห้องสอบจำลอง</a><a href="#how">วิธีทำ</a>`)+`
+  <main class="wrap pad">
+    <div class="hero">
+      <span class="tag">ข้อสอบแต่งขึ้นใหม่สำหรับฝึก ไม่ใช่ข้อสอบ ETS</span>
+      <h1>Part 1 ดูรูปแล้วฟัง · 100 ข้อ</h1>
+      <p>ดูภาพ ฟังประโยค 4 ประโยค แล้วเลือกประโยคที่บรรยายภาพได้ถูกต้อง ทุกข้อมีเฉลยรายตัวเลือก คำที่ต้องจับ และเทคนิคการฟัง</p>
+    </div>
+    <div class="cards">
+      <div class="card lead"><h3>เริ่มที่นี่</h3><p class="meta">วิธีดูภาพ 3 วินาทีก่อนเสียงเริ่ม ตัวลวง 8 แบบ และคำที่ออกบ่อยใน Part 1</p><div class="row"><a class="btn pri" href="#how">อ่านวิธีทำ Part 1</a></div></div>
+      <div class="card"><h3>ฝึกทีละข้อ</h3><p class="meta">ฟังซ้ำได้ ฟังช้า 0.75x ได้ เลือกฟังทีละประโยคได้ ตอบแล้วเห็นเฉลยทันที</p><div class="row"><a class="btn pri" href="#p/all/${next}">${st.done?`ทำต่อข้อ ${next}`:'เริ่มข้อ 1'}</a>${wrong?`<a class="btn" href="#p/wrong/">ทวนข้อที่ผิด (${wrong})</a>`:''}</div></div>
+      <div class="card"><h3>ความคืบหน้า</h3>
+        <div class="stat"><div><b>${st.done}<small class="muted" style="font-size:15px">/${N}</small></b><span>ข้อที่ทำแล้ว</span></div><div><b>${st.done?Math.round(st.ok/st.done*100):0}%</b><span>ตอบถูก</span></div><div><b>${wrong}</b><span>ข้อที่ผิดอยู่</span></div></div>
+        ${st.done?`<div class="row"><button class="btn sm" id="reset">ล้างผลทั้งหมด</button></div>`:''}
+      </div>
+    </div>
+    <section class="sec"><h2>สอบจำลองชุดละ 10 ข้อ</h2>
+      <p>เหมือนข้อสอบจริง เสียงเล่นครั้งเดียว ไม่มีปุ่มฟังซ้ำ จบ 4 ประโยคแล้วมีเวลา 5 วินาที ก่อนไปข้อต่อไปเอง</p>
+      <div class="sets">${Array.from({length:NSET},(_,i)=>{const k=i+1,r=S.ex[k];return `<a class="set${r?' done':''}" href="#x/${k}"><b>ชุด ${k}</b><span>ข้อ ${(k-1)*10+1}–${Math.min(N,k*10)}</span><span class="sc">${r?`ล่าสุด ${r.last}/10 · ดีสุด ${r.best}`:'ยังไม่ได้ทำ'}</span></a>`}).join('')}</div>
+    </section>
+    <section class="sec"><h2>ฝึกเฉพาะตัวลวงแต่ละแบบ</h2>
+      <p>แต่ละข้อมีจุดหลอกหลักหนึ่งแบบ แถบสีเขียวคือสัดส่วนที่ตอบถูกในแบบนั้น</p>
+      <div class="traps">${TORDER.map(t=>{const b=st.by[t];return `<a class="trap" href="#p/${t}/"><b>${TR[t].name}</b><span>${b.n} ข้อ · ${b.done?`ถูก ${b.ok}/${b.done}`:'ยังไม่ได้ทำ'}</span><div class="meter"><i style="width:${b.done?b.ok/b.n*100:0}%"></i></div></a>`}).join('')}</div>
+    </section>
+    <section class="sec"><h2>ข้อทั้งหมด</h2>
+      <div class="legend"><span class="ok"><i></i>ถูก</span><span class="bad"><i></i>ผิด</span><span><i></i>ยังไม่ทำ</span></div>
+      <div class="grid100">${Q.map(q=>{const r=S.a[q.n];return `<a href="#p/all/${q.n}" class="${r?(r.ok?'ok':'bad'):''}" aria-label="ข้อ ${q.n}${r?(r.ok?' ถูก':' ผิด'):''}">${q.n}</a>`}).join('')}</div>
+    </section>
+    ${credits()}
+  </main>`;
+  const rb=$('#reset');
+  if(rb)rb.onclick=()=>{
+    if(rb.dataset.c){S={a:{},ex:{}};save();home()}
+    else{rb.dataset.c=1;rb.textContent='กดอีกครั้งเพื่อยืนยันการล้าง';rb.classList.add('on')}
+  };
+}
+function credits(){
+  return `<footer><p>ข้อสอบชุดนี้แต่งขึ้นใหม่เพื่อการฝึก รูปแบบตามข้อสอบ TOEIC Part 1 แต่ไม่ใช่ข้อสอบของ ETS · TOEIC เป็นเครื่องหมายการค้าของ ETS</p>
+  <p>ภาพถ่ายจาก Unsplash ในคลังภาพ CC0 (cslr/cc0pictures) · เสียงอ่านสร้างด้วย Kokoro TTS สำเนียงอเมริกันและอังกฤษ</p>
+  <p>ผลการฝึกเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</p></footer>`;
+}
+
+/* ---------- practice ---------- */
+let C=null;
+function practice(f,n){
+  const list=queue(f);
+  let i=list.indexOf(n);if(i<0){i=0;n=list[0]}
+  const q=Q[n-1], r=S.a[n];
+  C={q,f,list,i,done:false};
+  const prevN=list[i-1], nextN=list[i+1];
+  app.innerHTML=bar(`ฝึก · ${esc(fname(f))}`,`<a href="#home">หน้าแรก</a><a href="#how">วิธีทำ</a>`)+`
+  <main class="pq pad">
+    <div class="left">
+      <figure class="ph">${img(q,'ภาพข้อ '+n)}</figure>
+      <div class="ctrl">
+        <div class="row"><button class="btn pri" id="pall">${PLAY} ฟังทั้ง 4 ประโยค</button><span class="hint" id="ah"></span></div>
+        <div class="row one"><span class="lbl">ทีละประโยค</span>${'ABCD'.split('').map((L,k)=>`<button data-s="${k}" aria-label="ฟังประโยค ${L}">${L}</button>`).join('')}</div>
+        <div class="row"><span class="lbl">ความเร็ว</span><button class="btn sm${P.rate==1?' on':''}" data-r="1">ปกติ 1x</button><button class="btn sm${P.rate!=1?' on':''}" data-r="0.75">ช้า 0.75x</button></div>
+        <label class="chk"><input type="checkbox" id="scr"${P.script?' checked':''}> แสดงข้อความระหว่างฟัง (ข้อสอบจริงไม่มี)</label>
+      </div>
+    </div>
+    <div class="right">
+      <div class="qh"><h2>ข้อ ${n}</h2><span class="muted">${i+1} จาก ${list.length}</span></div>
+      ${r?`<p class="prev">ครั้งก่อนตอบ (${r.c||'–'}) <span class="${r.ok?'ok':'bad'}">${r.ok?'ถูก':'ผิด'}</span></p>`:''}
+      <p class="muted">ฟังแล้วเลือกประโยคที่บรรยายภาพได้ถูกต้องที่สุด</p>
+      <div class="ans" role="group" aria-label="คำตอบ">${'ABCD'.split('').map(L=>`<button data-a="${L}" aria-label="ตอบ ${L}">${L}</button>`).join('')}</div>
+      <div id="rev" class="right"></div>
+      <div class="nav">
+        ${prevN?`<a class="btn" href="#p/${f}/${prevN}">← ข้อก่อน</a>`:'<span></span>'}
+        ${nextN?`<a class="btn pri" href="#p/${f}/${nextN}">ข้อต่อไป →</a>`:`<a class="btn pri" href="#home">จบแล้ว กลับหน้าแรก</a>`}
+      </div>
+    </div>
+  </main>`;
+  const all=()=>play(`a/${pad3(n)}.mp3`,q.cues[0][0]-.15,null,P.rate,{cues:q.cues,all:true,blocked:()=>{const h=$('#ah');if(h)h.textContent='แตะปุ่มเพื่อเล่นเสียง'}});
+  $('#pall').onclick=all;
+  $$('[data-r]').forEach(b=>b.onclick=()=>{P.rate=+b.dataset.r;savePref();$$('[data-r]').forEach(x=>x.classList.toggle('on',x===b));if(!au.paused)au.playbackRate=P.rate});
+  $('#scr').onchange=e=>{P.script=e.target.checked;savePref();if(!C.done)script()};
+  $$('.ans button').forEach(b=>b.onclick=()=>answer(b.dataset.a));
+  bindStatements();
+  script();
+  if(nextN)new Image().src=`img/${Q[nextN-1].photo}.jpg`;
+  all();
+}
+function bindStatements(){
+  $$('[data-s]').forEach(b=>b.onclick=()=>{
+    const q=C.q,k=+b.dataset.s;
+    play(`a/${pad3(q.n)}.mp3`,q.cues[k][0]-.1,q.cues[k][1]+.15,P.rate,{cues:q.cues,one:k});
+  });
+}
+function script(){
+  const q=C.q, rev=$('#rev');
+  if(!P.script){rev.innerHTML='';return}
+  rev.innerHTML=`<ol class="stm">${q.opts.map((o,k)=>`<li><button class="pl" data-s="${k}" aria-label="ฟังประโยค ${'ABCD'[k]}">${PLAY}</button><span class="L">${'ABCD'[k]}</span><div><p class="en">${esc(o.t)}</p></div></li>`).join('')}</ol>`;
+  bindStatements();
+}
+function answer(L){
+  if(C.done)return;
+  const q=C.q, ok=L===q.ans;
+  C.done=true;
+  S.a[q.n]={c:L,ok,t:Date.now()};save();
+  $$('.ans button').forEach(b=>{b.disabled=true;if(b.dataset.a===q.ans)b.classList.add('ok');else if(b.dataset.a===L)b.classList.add('bad')});
+  const tr=TR[q.trap];
+  $('#rev').innerHTML=`
+    <div class="verdict ${ok?'ok':'bad'}" role="status">${ok?`ถูกต้อง คำตอบคือ (${q.ans})`:`ยังไม่ใช่ คุณเลือก (${L}) คำตอบคือ (${q.ans})`}</div>
+    <ol class="stm">${q.opts.map((o,k)=>{const LL='ABCD'[k],y=LL===q.ans;return `<li class="${y?'ok':(LL===L?'bad':'')}">
+      <button class="pl" data-s="${k}" aria-label="ฟังประโยค ${LL}">${PLAY}</button><span class="L">${LL}</span>
+      <div><p class="en">${hl(o.t,q.kw)}</p><p class="th">${y?'✓ ':'✗ '}${esc(o.r)}</p></div></li>`}).join('')}</ol>
+    <div class="note trapn"><h4>จุดหลอกหลักของข้อนี้</h4><p><b>${tr.name}</b> · ${tr.desc}</p></div>
+    <div class="note"><h4>เทคนิคจับคำ</h4><p>${esc(q.tip)}</p><div class="chips">${q.kw.map(k=>`<span class="chip">${esc(k)}</span>`).join('')}</div></div>
+    <p class="hint">ลองกดฟังทีละประโยคแล้วพูดตาม (shadowing) จะช่วยให้หูชินกับเสียงจริง</p>`;
+  bindStatements();
+}
+
+/* ---------- exam ---------- */
+let E=null;
+function examIntro(k){
+  const a=(k-1)*10+1,b=Math.min(N,k*10), r=S.ex[k];
+  app.innerHTML=bar(`สอบจำลอง · ชุด ${k}`,`<a href="#home">หน้าแรก</a>`)+`
+  <main class="intro pad">
+    <h1 style="font-size:28px">ชุดที่ ${k} · ข้อ ${a}–${b}</h1>
+    <div class="card"><h3>เหมือนข้อสอบจริง</h3><ul>
+      <li>แต่ละข้อจะได้ยิน "Number …" แล้วตามด้วยประโยค A B C D <b>ครั้งเดียว</b> ประโยคไม่ขึ้นบนจอ</li>
+      <li>ตอบได้ตั้งแต่ระหว่างฟัง เปลี่ยนคำตอบได้จนกว่าจะขึ้นข้อใหม่</li>
+      <li>จบประโยค D แล้วมีเวลา 5 วินาที จากนั้นไปข้อต่อไปเอง ไม่มีปุ่มหยุดหรือย้อน</li>
+      <li>เปิดเสียงให้ได้ยินชัด และแนะนำให้ใช้หูฟัง</li>
+    </ul></div>
+    ${r?`<p class="muted">ครั้งล่าสุดได้ ${r.last}/10 · ดีที่สุด ${r.best}/10</p>`:''}
+    <div class="row"><button class="btn pri" id="go">เริ่มชุดที่ ${k}</button><a class="btn" href="#p/s${k}/">ฝึกชุดนี้แบบฟังซ้ำได้</a></div>
+  </main>`;
+  $('#go').onclick=()=>{E={k,ns:queue('s'+k),i:0,ans:{}};examQ()};
+}
+function examQ(){
+  if(!E)return;
+  const n=E.ns[E.i], q=Q[n-1];
+  app.innerHTML=bar(`ชุด ${E.k} · ข้อ ${n}`,`<div class="dots" aria-hidden="true">${E.ns.map((_,j)=>`<i class="${j<E.i?'done':j===E.i?'now':''}"></i>`).join('')}</div><span class="meta">${E.i+1}/${E.ns.length}</span><a href="#x/${E.k}">ออก</a>`)+`
+  <main class="ex pad">
+    <figure class="ph">${img(q,'ภาพข้อ '+n)}</figure>
+    <div class="row" style="justify-content:space-between;gap:14px">
+      <div class="ans" role="group" aria-label="คำตอบข้อ ${n}">${'ABCD'.split('').map(L=>`<button data-a="${L}" class="${E.ans[n]===L?'sel':''}" aria-label="ตอบ ${L}">${L}</button>`).join('')}</div>
+      <div class="status" id="st" role="status"><span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>กำลังเล่นเสียง</div>
+    </div>
+  </main>`;
+  $$('.ans button').forEach(b=>b.onclick=()=>{E.ans[n]=b.dataset.a;$$('.ans button').forEach(x=>x.classList.toggle('sel',x===b))});
+  const nx=E.ns[E.i+1];if(nx)new Image().src=`img/${Q[nx-1].photo}.jpg`;
+  const after=()=>{
+    let s=5;const st=$('#st');
+    const t=()=>{if(!E)return;if(s<=0){E.i++;E.i<E.ns.length?examQ():examEnd();return}st.textContent=`ข้อต่อไปใน ${s} วินาที`;s--;later(t,1000)};
+    t();
+  };
+  play(`a/${pad3(n)}.mp3`,0,null,1,{cb:after,blocked:()=>{
+    const st=$('#st');st.innerHTML='<button class="btn pri" id="resume">แตะเพื่อเล่นเสียง</button>';
+    $('#resume').onclick=()=>{st.innerHTML='<span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>กำลังเล่นเสียง';play(`a/${pad3(n)}.mp3`,0,null,1,{cb:after})};
+  }});
+}
+function examEnd(){
+  const k=E.k, ns=E.ns, ans=E.ans;
+  let sc=0;
+  ns.forEach(n=>{const q=Q[n-1],ok=ans[n]===q.ans;if(ok)sc++;S.a[n]={c:ans[n]||null,ok,t:Date.now()}});
+  const prev=S.ex[k];
+  S.ex[k]={last:sc,best:Math.max(sc,prev?prev.best:0),t:Date.now()};save();
+  E=null;
+  const traps={};ns.forEach(n=>{const q=Q[n-1];if(ans[n]!==q.ans)traps[q.trap]=(traps[q.trap]||0)+1});
+  const weak=Object.entries(traps).sort((a,b)=>b[1]-a[1]);
+  app.innerHTML=bar(`ผลชุด ${k}`,`<a href="#home">หน้าแรก</a>`)+`
+  <main class="res pad">
+    <div class="row" style="gap:18px;align-items:flex-end"><span class="big">${sc}/10</span><span class="muted">ชุดที่ ${k} · ดีที่สุด ${S.ex[k].best}/10</span></div>
+    ${weak.length?`<div class="note trapn"><h4>ตัวลวงที่พลาดในชุดนี้</h4><p>${weak.map(([t,c])=>`<a href="#p/${t}/">${TR[t].name}</a> (${c})`).join(' · ')}</p></div>`:`<div class="verdict ok">ถูกครบทั้ง 10 ข้อ</div>`}
+    <div class="tw"><table class="t"><thead><tr><th>ข้อ</th><th>ภาพ</th><th>คุณตอบ</th><th>เฉลย</th><th>จุดหลอก</th><th></th></tr></thead><tbody>
+    ${ns.map(n=>{const q=Q[n-1],ok=ans[n]===q.ans;return `<tr><td class="mono">${n}</td><td><img src="img/${q.photo}.jpg" alt=""></td><td class="${ok?'ok':'bad'}">${ans[n]||'ไม่ได้ตอบ'}</td><td class="mono">${q.ans}</td><td>${TR[q.trap].name}</td><td><a href="#p/s${k}/${n}">ดูเฉลย</a></td></tr>`}).join('')}
+    </tbody></table></div>
+    <div class="row"><a class="btn pri" href="#p/s${k}/${ns[0]}">ทวนเฉลยทั้งชุด</a>${k<NSET?`<a class="btn" href="#x/${k+1}">ไปชุดที่ ${k+1}</a>`:''}<a class="btn" href="#home">หน้าแรก</a></div>
+  </main>`;
+}
+
+/* ---------- method page ---------- */
+function example(t){
+  const e=EG[t], q=Q.find(x=>x.photo===e[0])||Q.find(x=>x.trap===t);if(!q)return '';
+  const y=q.opts['ABCD'.indexOf(q.ans)], n=q.opts.find(o=>o.t.startsWith(e[1]))||q.opts.find(o=>o!==y);
+  return `<div class="egw"><a href="#p/all/${q.n}" aria-label="ดูข้อ ${q.n}"><img src="img/${q.photo}.jpg" alt="ภาพตัวอย่างข้อ ${q.n}" loading="lazy"></a><div class="eg"><div><span class="y">✓</span><span>${esc(y.t)}</span></div><div><span class="n">✗</span><span>${esc(n.t)} <span class="muted">· ${esc(n.r)}</span></span></div></div></div>`;
+}
+function vt(rows){return `<table class="t"><tbody>${rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`).join('')}</tbody></table>`}
+function method(){
+  const st=stats();
+  app.innerHTML=bar('วิธีทำ Part 1',`<a href="#home">หน้าแรก</a><a href="#p/all/1">เริ่มฝึก</a>`)+`
+  <main class="doc pad">
+    <div class="hero"><h1>วิธีทำ Part 1 ดูรูปแล้วฟัง</h1>
+      <p>ข้อสอบจริงมี Part 1 แค่ 6 ข้อ ประโยคไม่ขึ้นบนจอและได้ยินครั้งเดียว แต่เป็นส่วนที่เก็บคะแนนง่ายที่สุด ถ้ารู้ว่าตัวลวงมาแบบไหน หลักคือ <b>ไม่ต้องเข้าใจทุกคำ แค่จับกริยากับคำนามให้ได้</b></p></div>
+
+    <section><h2>ทำทีละข้อ 4 ขั้น</h2>
+      <ol class="steps">
+        <li><b>ดูภาพ 3 วินาที ก่อนเสียงเริ่ม</b>ตอนผู้บรรยายพูด "Number …" ให้ถามตัวเองสามคำถาม: ใครหรืออะไรเด่นที่สุด (มีคนกี่คน) เขากำลังทำอะไร และของอยู่ตรงไหน</li>
+        <li><b>นึกคำภาษาอังกฤษไว้ล่วงหน้า</b>นึกคำนามกับกริยาไว้ 2–3 คำ เช่น ภาพคนนั่งริมทะเล → sitting, facing, water ภาพไม่มีคน → parked, stacked, lined up</li>
+        <li><b>ตัดสินทีละประโยคทันที</b>ฟังจบแต่ละประโยคให้ตัดสินในใจเลยว่า ✓ ✗ หรือ ? แล้วเล็งไว้ที่ตัวที่ดีที่สุด อย่ารอฟังครบ 4 ประโยคแล้วค่อยนึก เพราะจะลืมประโยคแรก</li>
+        <li><b>ฟังกริยาหลังประธานเป็นหลัก</b>ประโยค Part 1 เกือบทั้งหมดเป็นรูป ประธาน + is/are + กริยา + ตำแหน่ง ส่วนที่บอกถูกหรือผิดคือกริยากับคำบุพบทท้ายประโยค</li>
+      </ol>
+      <p>ถ้าไม่แน่ใจ ให้เลือกประโยคที่ "ไม่ผิด" ไม่ต้องหา "ดีที่สุด" คำตอบที่ถูกใน Part 1 มักเป็นประโยคธรรมดา ใช้คำกว้าง และบรรยายสิ่งที่เห็นชัดที่สุดในภาพ</p>
+    </section>
+
+    <section><h2>ไวยากรณ์ 3 แบบที่ต้องแยกให้ออก</h2>
+      <div class="tw"><table class="t"><thead><tr><th>รูปประโยค</th><th>แปลว่า</th><th>ต้องเห็นอะไรในภาพ</th></tr></thead><tbody>
+        <tr><td><b>is/are + V-ing</b><div class="muted">A man is holding a cup.</div></td><td>คนกำลังทำ</td><td>คนที่กำลังทำท่านั้นอยู่จริง</td></tr>
+        <tr><td><b>is/are being + V3</b><div class="muted">A car is being washed.</div></td><td>ของกำลังถูกทำ</td><td>ต้องมีคนกำลังทำกับของอยู่ ถ้าภาพไม่มีคน ตัดทิ้งได้เกือบทุกครั้ง</td></tr>
+        <tr><td><b>has/have been + V3<br>is/are + V3</b><div class="muted">Chairs have been stacked.<br>Chairs are stacked.</div></td><td>ของอยู่ในสภาพนั้นแล้ว</td><td>ไม่ต้องมีคน แค่เห็นของอยู่ในสภาพนั้น</td></tr>
+        <tr><td><b>There is/are + นาม + ตำแหน่ง</b><div class="muted">There are boats in the harbor.</div></td><td>มี…อยู่ที่…</td><td>ของนั้นอยู่ตรงตำแหน่งที่พูดจริง</td></tr>
+      </tbody></table></div>
+      <p class="muted">ข้อยกเว้นที่เจอน้อย: "is being displayed" (กำลังวางโชว์) บางครั้งใช้กับสินค้าที่วางโชว์อยู่ได้แม้ไม่มีคน</p>
+    </section>
+
+    <section><h2>ตัวลวง 8 แบบ</h2>
+      <p>แต่ละข้อในชุดนี้มีจุดหลอกหลักหนึ่งแบบ กดที่ชื่อเพื่อฝึกเฉพาะแบบนั้น</p>
+      ${TORDER.map(t=>`<div class="tcard"><h3><a href="#p/${t}/">${TR[t].name}</a> <span class="muted" style="font-weight:400;font-size:14px">${st.by[t].n} ข้อ</span></h3><p>${TR[t].desc}</p>${example(t)}</div>`).join('')}
+    </section>
+
+    <section><h2>คำที่ออกบ่อยใน Part 1</h2>
+      <div class="vg">
+        <div><h3>การกระทำของคน</h3>${vt([['wearing','สวมอยู่ (สภาพ)'],['putting on','กำลังสวม'],['taking off','กำลังถอด'],['holding','ถืออยู่'],['carrying','ถือ/แบกไปด้วย'],['reaching for','เอื้อมหยิบ'],['examining / inspecting','ตรวจดู'],['looking at / gazing at','มอง'],['pointing at','ชี้'],['leaning against','พิง'],['facing','หันหน้าไปทาง'],['walking along / across','เดินเลียบ / ข้าม'],['standing in line','ยืนเข้าแถว'],['pushing a cart','เข็นรถเข็น'],['sweeping / mopping','กวาด / ถู'],['pouring','เท'],['boarding','ขึ้นรถ เรือ เครื่องบิน'],['loading / unloading','ขนขึ้น / ขนลง']])}</div>
+        <div><h3>สภาพของสิ่งของ</h3>${vt([['stacked / piled','ซ้อน / กอง'],['arranged','จัดเรียง'],['lined up / in a row','เรียงเป็นแถว'],['displayed','วางโชว์'],['hanging','แขวน'],['mounted on','ติดอยู่บน (ผนัง)'],['leaning against','พิงอยู่'],['spread out / scattered','กางออก / กระจาย'],['parked','จอดอยู่'],['docked / tied up','เรือจอด / ผูกไว้'],['unoccupied / vacant','ว่าง ไม่มีคน'],['occupied','มีคนอยู่'],['lit / on','ไฟเปิด / ถูกจุด'],['open / closed','เปิด / ปิด'],['folded / rolled up','พับ / ม้วน'],['empty / full','ว่าง / เต็ม']])}</div>
+        <div><h3>ตำแหน่งและภาพวิว</h3>${vt([['next to / beside','ข้าง ๆ'],['in front of / behind','ข้างหน้า / ข้างหลัง'],['on top of','บนสุดของ'],['along','เลียบ ตามแนว'],['across','ข้าม ฝั่งตรงข้าม'],['between A and B','ระหว่าง'],['side by side','อยู่เคียงกัน'],['on both sides','ทั้งสองฝั่ง'],['in the distance','ไกลออกไป'],['overlook','มองลงมาเห็น'],['lead (up) to','นำไปสู่'],['span / cross','ทอดข้าม (สะพาน)'],['line','เรียงริม (Trees line the road.)'],['surround','ล้อมรอบ'],['reflected in','สะท้อนใน (น้ำ กระจก)']])}</div>
+      </div>
+    </section>
+
+    <section><h2>ฝึกหูให้จับคำได้</h2>
+      <ul>
+        <li><b>เริ่มที่ 0.75x แล้วค่อยขึ้น 1x</b> ฟังช้าให้จับคำได้ก่อน แล้วฟังข้อเดิมที่ความเร็วปกติ</li>
+        <li><b>คำเล็ก ๆ จะเบาและหายไป</b> "is being" ฟังเหมือน อิซ-บีอิง, "has been" เหลือแค่ เอิซ-บิน, a / the / some แทบไม่ได้ยิน ให้โฟกัสคำที่ถูกเน้นคือคำนามกับกริยา</li>
+        <li><b>คู่เสียงคล้ายที่ข้อสอบชอบใช้</b> walk–work, copy–coffee, file–pile, watch–wash, pancake–pan ได้ยินคำคล้ายของในภาพให้ระวังเป็นพิเศษ</li>
+        <li><b>Shadowing</b> หลังดูเฉลย กดฟังทีละประโยคแล้วพูดตามทันที 2–3 รอบ ช่วยให้หูแยกเสียงได้เร็วขึ้นมาก</li>
+        <li><b>ข้อสอบจริงมี 4 สำเนียง</b> อเมริกัน แคนาดา อังกฤษ ออสเตรเลีย ชุดนี้มีอเมริกันกับอังกฤษ ฟังให้ชินทั้งสองแบบ</li>
+      </ul>
+    </section>
+
+    <section><h2>แผนฝึกวันละ 10 ข้อ</h2>
+      <ol class="steps">
+        <li><b>ทำชุดสอบจำลอง 10 ข้อ</b>ฟังครั้งเดียวเหมือนจริง ไม่หยุด</li>
+        <li><b>ทวนเฉลยทีละข้อ</b>อ่านเหตุผลทุกตัวเลือก โดยเฉพาะตัวที่เลือกผิด ดูว่าโดนตัวลวงแบบไหน</li>
+        <li><b>ฟังซ้ำพร้อมพูดตาม</b>กดฟังทีละประโยค เปิดข้อความ แล้ว shadowing</li>
+        <li><b>วันต่อไปเริ่มจากข้อที่ผิด</b>ใช้ปุ่ม "ทวนข้อที่ผิด" ที่หน้าแรก ก่อนทำชุดใหม่</li>
+      </ol>
+      <div class="row"><a class="btn pri" href="#x/1">เริ่มชุดที่ 1</a><a class="btn" href="#p/all/1">ฝึกทีละข้อ</a></div>
+    </section>
+    ${credits()}
+  </main>`;
+}
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown',e=>{
+  if(e.target.closest('input,textarea')||e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key.toUpperCase();
+  const m={'1':'A','2':'B','3':'C','4':'D'}[k]||k;
+  if('ABCD'.includes(m)&&m.length===1){const b=$(`.ans button[data-a="${m}"]`);if(b&&!b.disabled){b.click();e.preventDefault()}}
+  else if(C&&location.hash.startsWith('#p/')){
+    if(e.key==='ArrowRight'){const a=$('.nav .btn.pri');a&&a.click()}
+    else if(e.key==='ArrowLeft'){const a=$('.nav a.btn:not(.pri)');a&&a.click()}
+    else if(e.key===' '&&!e.target.closest('button,a')){e.preventDefault();au.paused?$('#pall').click():stopAudio()}
+  }
+});
+route(true);
+</script>
+</body>
+</html>

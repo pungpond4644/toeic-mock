@@ -253,6 +253,10 @@ function home(){
       <button class="btn pri" data-go="${id}" data-mode="full">เริ่มสอบเต็มชุด</button>
       <div class="row"><button class="btn sm" data-go="${id}" data-mode="L">Listening อย่างเดียว</button><button class="btn sm" data-go="${id}" data-mode="R">Reading อย่างเดียว</button></div></div>`).join('')}
    </div></section>
+   <section class="sec"><h2>ฝึกเพิ่มเฉพาะส่วน</h2><div class="forms">
+    <div class="form"><h3>Part 1 ดูรูปแล้วฟัง</h3><div class="meta">100 ข้อ · มีเฉลยทุกตัวเลือก คำที่ต้องจับ และวิธีทำ ฟังซ้ำและฟังช้าได้</div>
+      <a class="btn pri" href="part1/" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">เปิดชุดฝึก Part 1</a></div>
+   </div></section>
    <section class="sec"><h2>โครงสร้างข้อสอบ</h2><div class="tw"><table class="t"><tr><th>ส่วน</th><th>Part</th><th class="n">ข้อ</th><th class="n">เวลา</th></tr>
     ${[1,2,3,4,5,6,7].map(p=>`<tr><td>${p<5?'Listening':'Reading'}</td><td>${p}. ${PARTS[p]}</td><td class="n">${PCOUNT[p]}</td><td class="n">${p===1?'45 นาที':p===5?'75 นาที':''}</td></tr>`).join('')}
    </table></div></section>
